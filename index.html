@@ -49,13 +49,17 @@
     .wrap { position: relative; z-index: 1; max-width: 1120px; margin: 0 auto; padding: 28px 18px 80px; }
     nav.toc {
       position: sticky; top: 12px; z-index: 5;
-      display: flex; gap: 6px; flex-wrap: wrap;
+      display: flex; gap: 6px; flex-wrap: nowrap;
       padding: 10px 12px; margin-bottom: 22px;
       background: rgba(8, 22, 32, 0.62);
       backdrop-filter: blur(18px);
       border: 1px solid rgba(212, 175, 106, 0.28);
       border-radius: 999px;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
     }
+    nav.toc::-webkit-scrollbar { display: none; }
     nav.toc a {
       color: var(--muted); text-decoration: none; font-size: 11px; font-weight: 600;
       padding: 6px 9px; border-radius: 999px;
@@ -153,7 +157,20 @@
     @media (max-width: 860px) {
       .g2, .g3 { grid-template-columns: 1fr; }
       .panel, .hero { padding: 24px 20px; }
-      nav.toc { display: none; }
+      nav.toc {
+        display: flex;
+        top: 8px;
+        margin: 0 -6px 18px;
+        padding: 8px 10px;
+        border-radius: 18px;
+      }
+      nav.toc a {
+        flex: 0 0 auto;
+        min-width: 36px;
+        text-align: center;
+        font-size: 13px;
+        padding: 8px 10px;
+      }
     }
     @media print {
       body { background: #fff; color: #1a2430; }
