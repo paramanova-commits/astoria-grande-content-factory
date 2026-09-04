@@ -3,962 +3,780 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Astoria Grande Content Factory — подача v0.3</title>
+  <title>Astoria Grande Content Factory — презентация</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@1,400;1,500&display=swap" rel="stylesheet" />
   <style>
-    :root {
-      --ink: #f4eee4;
-      --muted: #b7c4cc;
-      --line: rgba(212, 175, 106, 0.18);
-      --teal: #d4af6a;
-      --gold: #d4af6a;
-      --paper: rgba(8, 22, 32, 0.72);
-      --cream: #f3ebe0;
-    }
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      color: var(--ink);
-      font-family: Manrope, system-ui, sans-serif;
-      background: #061018;
-      min-height: 100%;
-    }
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      pointer-events: none;
-      background:
-        linear-gradient(180deg, rgba(6,16,24,.28) 0%, rgba(6,16,24,.55) 42%, #061018 78%),
-        url("assets/hero-evening-liner.png") center top / cover no-repeat;
-    }
-    body::after {
-      content: "";
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      pointer-events: none;
-      opacity: .22;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)'/%3E%3C/svg%3E");
-      mix-blend-mode: overlay;
-    }
-    .wrap { position: relative; z-index: 1; max-width: 1120px; margin: 0 auto; padding: 28px 18px 80px; }
-    nav.toc {
-      position: sticky; top: 12px; z-index: 5;
-      display: flex; gap: 6px; flex-wrap: nowrap;
-      padding: 10px 12px; margin-bottom: 22px;
-      background: rgba(8, 22, 32, 0.62);
-      backdrop-filter: blur(18px);
-      border: 1px solid rgba(212, 175, 106, 0.28);
-      border-radius: 999px;
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: none;
-    }
-    nav.toc::-webkit-scrollbar { display: none; }
-    nav.toc a {
-      color: var(--muted); text-decoration: none; font-size: 11px; font-weight: 600;
-      padding: 6px 9px; border-radius: 999px;
-    }
-    nav.toc a:hover { background: rgba(212, 175, 106, .16); color: var(--gold); }
-    .panel {
-      background: var(--paper);
-      backdrop-filter: blur(22px);
-      border: 1px solid rgba(212, 175, 106, 0.28);
-      border-radius: 28px;
-      padding: 36px 40px 40px;
-      margin-bottom: 22px;
-      box-shadow: 0 18px 50px rgba(0,0,0,.28);
-    }
-    .hero {
-      padding: 64px 48px 52px;
-      background:
-        linear-gradient(145deg, rgba(8,22,32,.78), rgba(8,22,32,.42)),
-        rgba(8, 22, 32, 0.35);
-      border-color: rgba(212, 175, 106, 0.45);
-    }
-    .blank {
-      min-height: 420px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      background: rgba(8, 22, 32, 0.55);
-      border: 1px dashed rgba(212, 175, 106, 0.35);
-    }
-    .blank .placeholder {
-      font-family: Fraunces, Georgia, serif;
-      font-size: 42px;
-      color: rgba(212, 175, 106, .55);
-      text-align: center;
-      margin: 48px 0 0;
-      font-weight: 500;
-      letter-spacing: .04em;
-    }
-    .kicker {
-      margin: 0 0 10px;
-      font-size: 12px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--gold);
-    }
-    h1 {
-      font-family: Fraunces, Georgia, serif;
-      font-size: clamp(36px, 5vw, 56px);
-      line-height: 1.08; font-weight: 600; margin: 0 0 14px; letter-spacing: -.02em;
-      color: #f7f1e6;
-    }
-    h2 {
-      font-family: Fraunces, Georgia, serif;
-      font-size: clamp(22px, 2.4vw, 28px); line-height: 1.28; font-weight: 600; margin: 0 0 12px;
-      color: #f4eee4;
-    }
-    h3 { font-size: 16px; margin: 22px 0 10px; color: var(--gold); font-weight: 700; }
-    p, li { font-size: 15.5px; line-height: 1.6; color: #d8d2c6; }
-    p { margin: 0 0 12px; }
-    ul, ol { margin: 0 0 12px; padding-left: 18px; }
-    li { margin-bottom: 6px; }
-    .lead { font-size: 18px; color: #e4ddd2; }
-    .muted { color: var(--muted); font-size: 13.5px; }
-    .grid { display: grid; gap: 14px; }
-    .g2 { grid-template-columns: repeat(2, 1fr); }
-    .g3 { grid-template-columns: repeat(3, 1fr); }
-    .soft {
-      background: rgba(255,255,255,.06);
-      border: 1px solid rgba(212, 175, 106, 0.22);
-      border-radius: 18px;
-      padding: 16px 18px;
-    }
-    .soft h4 { margin: 0 0 8px; font-size: 14px; color: #f3ebe0; }
-    .pill {
-      display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: .08em;
-      text-transform: uppercase; color: var(--gold);
-      background: rgba(212, 175, 106, .12); border-radius: 999px; padding: 4px 10px; margin-bottom: 10px;
-    }
-    .table-wrap { overflow-x: auto; border-radius: 16px; margin: 12px 0 16px; }
-    table { width: 100%; border-collapse: collapse; font-size: 13px; }
-    th {
-      text-align: left; font-weight: 700; color: #f3ebe0;
-      background: rgba(212, 175, 106, .16); padding: 10px 11px;
-    }
-    td { padding: 9px 11px; border-bottom: 1px solid var(--line); vertical-align: top; color: #d8d2c6; }
-    tr:last-child td { border-bottom: 0; }
-    tr:nth-child(even) td { background: rgba(255,255,255,.04); }
-    .idea {
-      background: rgba(255,255,255,.05);
-      border: 1px solid rgba(212, 175, 106, 0.14);
-      border-radius: 16px;
-      padding: 14px 16px;
-      margin-bottom: 10px;
-    }
-    .idea strong { display: block; margin-bottom: 4px; font-size: 15px; color: #f3ebe0; }
-    .script { font-size: 14px; background: rgba(212, 175, 106, .08); border-radius: 16px; padding: 16px 18px; border: 1px solid rgba(212, 175, 106, .16); }
-    .script p { margin: 0 0 8px; }
-    @media (max-width: 860px) {
-      .g2, .g3 { grid-template-columns: 1fr; }
-      .panel, .hero { padding: 24px 20px; }
-      nav.toc {
-        display: flex;
-        top: 8px;
-        margin: 0 -6px 18px;
-        padding: 8px 10px;
-        border-radius: 18px;
-      }
-      nav.toc a {
-        flex: 0 0 auto;
-        min-width: 36px;
-        text-align: center;
-        font-size: 13px;
-        padding: 8px 10px;
-      }
-    }
-    @media print {
-      body { background: #fff; color: #1a2430; }
-      body::before, body::after, nav.toc { display: none; }
-      .panel { break-inside: avoid; box-shadow: none; background: #fff; border-color: #ddd; }
-      h1, h2, h3, p, li, td, th, .lead, .muted, .idea strong, .soft h4 { color: #1a2430 !important; }
-    }
-  </style>
+:root {
+  --ink: #1a1a1a;
+  --muted: #737373;
+  --line: #e8e8e8;
+  --blue: #2b68c9;
+  --blue-dark: #1f52a8;
+  --blue-soft: #eef4fc;
+  --sea: #0a3d5c;
+  --paper: #ffffff;
+  --shadow: 0 8px 32px rgba(0,20,60,.14);
+  --shadow-lg: 0 16px 48px rgba(0,20,60,.22);
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  color: var(--ink);
+  font-family: Montserrat, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: #0c2840;
+  min-height: 100%;
+  -webkit-font-smoothing: antialiased;
+}
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: url("assets/hero-evening-liner.png") center 40% / cover no-repeat;
+  transform: scale(1.03);
+}
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg,
+      rgba(8,32,58,.72) 0%,
+      rgba(12,48,78,.38) 35%,
+      rgba(10,40,68,.52) 65%,
+      rgba(6,24,44,.78) 100%),
+    radial-gradient(ellipse 80% 50% at 50% 20%, rgba(43,104,201,.12), transparent 70%);
+}
+.wrap {
+  position: relative;
+  z-index: 1;
+  max-width: 1060px;
+  margin: 0 auto;
+  padding: 0 20px 72px;
+}
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 0 12px;
+  margin-bottom: 0;
+  background: linear-gradient(180deg, rgba(8,32,58,.88) 0%, rgba(8,32,58,.72) 70%, transparent 100%);
+  backdrop-filter: blur(10px);
+}
+nav.toc {
+  display: flex;
+  gap: 4px;
+  flex-wrap: nowrap;
+  max-width: 100%;
+  padding: 6px 10px;
+  background: rgba(255,255,255,.94);
+  border: 1px solid rgba(43,104,201,.22);
+  border-radius: 999px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  box-shadow: 0 4px 20px rgba(0,20,60,.18);
+}
+nav.toc::-webkit-scrollbar { display: none; }
+nav.toc a {
+  color: var(--blue-dark);
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 10px;
+  border-radius: 999px;
+  white-space: nowrap;
+  transition: background .15s, color .15s;
+}
+nav.toc a:hover { background: var(--blue-soft); color: var(--blue); }
+nav.toc a.on { background: var(--blue); color: #fff; }
+.brand-script {
+  margin: 0;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(32px, 5vw, 44px);
+  color: #fff;
+  letter-spacing: .02em;
+  text-shadow: 0 2px 16px rgba(0,0,0,.35);
+  line-height: 1;
+  text-align: center;
+}
+.panel {
+  background: var(--paper);
+  border-radius: 24px;
+  padding: 36px 40px 40px;
+  margin-bottom: 20px;
+  box-shadow: var(--shadow-lg);
+  border: none;
+}
+.hero {
+  text-align: center;
+  padding: 40px 32px 56px;
+  background: transparent;
+  box-shadow: none;
+  border-radius: 0;
+  margin-bottom: 28px;
+}
+.hero-title {
+  margin: 0 0 18px;
+  color: #fff;
+  font-size: clamp(15px, 2vw, 18px);
+  line-height: 1.6;
+  font-weight: 500;
+  max-width: 560px;
+  margin-left: auto;
+  margin-right: auto;
+  text-shadow: 0 2px 16px rgba(0,0,0,.35);
+}
+.hero-legal {
+  margin: 0 0 20px;
+  color: rgba(255,255,255,.82);
+  font-size: 14px;
+  line-height: 1.7;
+  text-shadow: 0 1px 10px rgba(0,0,0,.3);
+}
+.hero-contacts-label {
+  margin: 0 0 10px;
+  color: rgba(255,255,255,.9);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  text-shadow: 0 1px 10px rgba(0,0,0,.3);
+}
+.hero-contacts {
+  list-style: none;
+  margin: 0 auto 8px;
+  padding: 0;
+  text-align: center;
+}
+.hero-contacts li {
+  margin: 0 0 6px;
+  color: rgba(255,255,255,.92);
+  font-size: 15px;
+  line-height: 1.5;
+  text-shadow: 0 1px 10px rgba(0,0,0,.3);
+}
+.hero-contacts a {
+  color: #fff;
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.hero-contacts a:hover {
+  color: rgba(255,255,255,.85);
+}
+.hero-cta {
+  display: inline-block;
+  margin-top: 28px;
+  padding: 14px 32px;
+  background: #fff;
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 999px;
+  text-decoration: none;
+  box-shadow: 0 4px 20px rgba(0,0,0,.2);
+  transition: transform .15s, box-shadow .15s;
+}
+.hero-cta:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 28px rgba(0,0,0,.28);
+  text-decoration: none;
+}
+.kicker {
+  margin: 0 0 8px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--blue);
+}
+h1 {
+  font-size: clamp(32px, 5vw, 48px);
+  line-height: 1.12;
+  font-weight: 700;
+  margin: 0 0 16px;
+  letter-spacing: -.02em;
+  color: var(--ink);
+}
+h2 {
+  font-size: clamp(20px, 2.4vw, 26px);
+  line-height: 1.3;
+  font-weight: 700;
+  margin: 0 0 20px;
+  color: var(--ink);
+}
+h3 {
+  font-size: 15px;
+  margin: 28px 0 12px;
+  color: var(--blue-dark);
+  font-weight: 700;
+  letter-spacing: -.01em;
+}
+p, li {
+  font-size: 15px;
+  line-height: 1.65;
+  color: #363636;
+}
+p { margin: 0 0 14px; }
+p:last-child { margin-bottom: 0; }
+ul, ol { margin: 0 0 16px; padding-left: 20px; }
+li { margin-bottom: 8px; }
+.lead { font-size: 17px; line-height: 1.6; color: #444; }
+.muted { color: var(--muted); font-size: 14px; }
+a { color: var(--blue); text-decoration: none; font-weight: 500; }
+a:hover { color: var(--blue-dark); text-decoration: underline; }
+.table-wrap {
+  overflow-x: auto;
+  border-radius: 16px;
+  margin: 16px 0 20px;
+  border: 1px solid var(--line);
+  box-shadow: 0 2px 8px rgba(0,0,0,.04);
+  -webkit-overflow-scrolling: touch;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  table-layout: auto;
+}
+th {
+  text-align: left;
+  font-weight: 600;
+  color: #fff;
+  background: var(--blue);
+  padding: 12px 14px;
+  vertical-align: middle;
+  line-height: 1.35;
+  word-break: normal;
+  overflow-wrap: break-word;
+}
+td {
+  padding: 11px 14px;
+  border-bottom: 1px solid var(--line);
+  vertical-align: middle;
+  color: var(--ink);
+  line-height: 1.45;
+  word-break: normal;
+  overflow-wrap: break-word;
+  hyphens: manual;
+}
+tr:last-child td { border-bottom: 0; }
+tbody tr:nth-child(even) td { background: #fafbfc; }
+tbody tr:hover td { background: var(--blue-soft); }
+td.num, th.num {
+  text-align: right;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+tr.subtotal td { background: #f3f4f6 !important; font-weight: 700; }
+tr.grand-total td { background: var(--blue-soft) !important; font-weight: 700; color: var(--blue-dark); }
+tr.section-row td {
+  background: #eef3fb !important;
+  font-weight: 700;
+  color: var(--blue-dark);
+  border-top: 2px solid #c8d9f0;
+}
+tr.subheading-row td {
+  background: #f7f9fc !important;
+  text-align: center;
+  font-weight: 700;
+  color: var(--blue-dark);
+  border-top: 2px solid #dde6f2;
+  padding: 12px 14px;
+}
+tr.subheading-row strong { font-weight: 700; }
+.budget-table {
+  table-layout: fixed;
+  min-width: 920px;
+}
+.budget-table .col-idx { width: 36px; }
+.budget-table .col-task { width: 22%; }
+.budget-table .col-name { width: 26%; }
+.budget-table .col-q1 { width: 8%; }
+.budget-table .col-q2 { width: 8%; }
+.budget-table .col-q3 { width: 9%; }
+.budget-table .col-price { width: 13%; }
+.budget-table .col-total { width: 13%; }
+.budget-table th:first-child,
+.budget-table td:first-child {
+  width: 36px;
+  min-width: 36px;
+  max-width: 40px;
+  text-align: center;
+  color: var(--muted);
+  padding-left: 8px;
+  padding-right: 8px;
+}
+.budget-table td:nth-child(2),
+.budget-table th:nth-child(2) { min-width: 150px; }
+.budget-table td:nth-child(3),
+.budget-table th:nth-child(3) { min-width: 160px; }
+.budget-table td.num:not(:nth-last-child(-n+2)),
+.budget-table th.num:not(:nth-last-child(-n+2)) { text-align: center; }
+.budget-table td.total-label,
+.budget-table th.total-label {
+  text-align: right;
+  white-space: nowrap;
+  padding-right: 16px;
+}
+.budget-table-6 {
+  min-width: 880px;
+}
+.budget-table-6 .col-task { width: 38%; }
+.budget-table-6 .col-q1 { width: 10%; }
+.budget-table-6 .col-q2 { width: 10%; }
+.budget-table-6 .col-q3 { width: 10%; }
+.budget-table-6 .col-price { width: 16%; }
+.budget-table-6 .col-total { width: 16%; }
+.budget-table-6 th:first-child,
+.budget-table-6 td:first-child {
+  width: auto;
+  min-width: 240px;
+  max-width: none;
+  text-align: left;
+  color: var(--ink);
+  padding-left: 14px;
+  padding-right: 14px;
+}
+.budget-table-6 td.num:not(:nth-last-child(-n+2)),
+.budget-table-6 th.num:not(:nth-last-child(-n+2)) { text-align: center; }
+.index-table td:first-child,
+.index-table th:first-child {
+  width: 56px;
+  min-width: 56px;
+  max-width: 64px;
+  text-align: center;
+  white-space: nowrap;
+}
+.index-table td:nth-child(2),
+.index-table th:nth-child(2) { min-width: 180px; }
+.index-table td:nth-child(3),
+.index-table th:nth-child(3) { min-width: 200px; }
+.heroes-table {
+  table-layout: fixed;
+  min-width: 920px;
+}
+.heroes-table .col-hero { width: 12%; }
+.heroes-table .col-role { width: 22%; }
+.heroes-table .col-brand { width: 31%; }
+.heroes-table .col-ideas { width: 35%; }
+.heroes-table th:first-child,
+.heroes-table td:first-child {
+  text-align: left;
+  white-space: nowrap;
+  font-weight: 600;
+  color: var(--blue-dark);
+  vertical-align: top;
+  padding-top: 12px;
+}
+.content-table {
+  table-layout: fixed;
+  min-width: 720px;
+}
+.content-table th:first-child,
+.content-table td:first-child {
+  min-width: 120px;
+  text-align: left;
+  white-space: normal;
+  vertical-align: top;
+}
+.content-table td:nth-child(2),
+.content-table th:nth-child(2) { min-width: 160px; }
+.content-table td:nth-child(3),
+.content-table th:nth-child(3) { min-width: 180px; }
+.formats-table {
+  table-layout: fixed;
+  min-width: 900px;
+}
+.formats-table .col-format { width: 16%; }
+.formats-table .col-idea { width: 50%; }
+.formats-table .col-hook { width: 34%; }
+.formats-table th,
+.formats-table td {
+  vertical-align: top;
+  overflow-wrap: break-word;
+}
+.formats-table th:first-child,
+.formats-table td:first-child {
+  min-width: 0;
+  text-align: left;
+  white-space: normal;
+  font-weight: 600;
+  color: var(--blue-dark);
+}
+.formats-table td:nth-child(2),
+.formats-table th:nth-child(2),
+.formats-table td:nth-child(3),
+.formats-table th:nth-child(3) {
+  min-width: 0;
+  text-align: left;
+}
+.kv-table {
+  table-layout: fixed;
+  min-width: 520px;
+}
+.kv-table .col-key { width: 54%; }
+.kv-table .col-val { width: 46%; }
+.kv-table th,
+.kv-table td { vertical-align: middle; }
+.kv-table th:first-child,
+.kv-table td:first-child {
+  min-width: 0;
+  text-align: left;
+  font-weight: 600;
+  color: var(--blue-dark);
+  overflow-wrap: break-word;
+}
+.kv-table th:last-child,
+.kv-table td:last-child {
+  min-width: 0;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+.scenario-table {
+  table-layout: fixed;
+  min-width: 720px;
+}
+.scenario-table .col-scenario { width: 18%; }
+.scenario-table .col-views { width: 16%; }
+.scenario-table .col-bookings { width: 14%; }
+.scenario-table .col-margin { width: 26%; }
+.scenario-table .col-roi { width: 14%; }
+.scenario-table th,
+.scenario-table td { vertical-align: middle; }
+.scenario-table td.num,
+.scenario-table th.num { text-align: right; }
+.kv-table {
+  table-layout: fixed;
+  min-width: 640px;
+}
+.kv-table .col-key { width: 58%; }
+.kv-table .col-val { width: 42%; }
+.kv-table th,
+.kv-table td {
+  vertical-align: top;
+  text-align: left;
+  overflow-wrap: break-word;
+}
+.kv-table td:first-child,
+.kv-table th:first-child {
+  min-width: 0;
+  font-weight: 600;
+  color: var(--blue-dark);
+}
+.kv-table td:last-child,
+.kv-table th:last-child {
+  min-width: 0;
+  font-variant-numeric: tabular-nums;
+}
+.scenario-table {
+  table-layout: fixed;
+  min-width: 900px;
+}
+.scenario-table .col-scenario { width: 16%; }
+.scenario-table .col-views { width: 16%; }
+.scenario-table .col-bookings { width: 12%; }
+.scenario-table .col-margin { width: 28%; }
+.scenario-table .col-roi { width: 12%; }
+.scenario-table th,
+.scenario-table td {
+  vertical-align: top;
+  overflow-wrap: break-word;
+}
+.scenario-table td:first-child,
+.scenario-table th:first-child {
+  font-weight: 600;
+  color: var(--blue-dark);
+}
+.scenario-table td.num,
+.scenario-table th.num {
+  text-align: right;
+  white-space: nowrap;
+}
+.package-note {
+  margin: 0 0 14px;
+  padding: 14px 18px;
+  background: #f7f9fc;
+  border: 1px solid #dde6f2;
+  border-radius: 999px;
+  font-size: 13px;
+  color: var(--muted);
+  text-align: center;
+}
+.idea {
+  background: var(--blue-soft);
+  border: 1px solid #c8d9f0;
+  border-radius: 16px;
+  padding: 16px 18px;
+  margin-bottom: 12px;
+}
+.idea strong { display: block; margin-bottom: 4px; font-size: 14px; color: var(--blue-dark); }
+.tone-list { margin: 0 0 16px; padding-left: 20px; }
+.tone-list li { margin-bottom: 10px; }
+.tone-list strong { font-weight: 700; color: var(--ink); }
+.case-metrics { margin: 20px 0 8px; }
+.metrics-platform {
+  margin: 24px 0 10px;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--blue-dark);
+  letter-spacing: -.01em;
+}
+.case-metrics .metrics-platform:first-child { margin-top: 4px; }
+.metrics-table { table-layout: auto; min-width: 0; }
+.metrics-table td:first-child,
+.metrics-table th:first-child {
+  width: 72px;
+  min-width: 72px;
+  text-align: center;
+  white-space: nowrap;
+}
+.metrics-table td.num,
+.metrics-table th.num { text-align: right; white-space: nowrap; }
+figure { margin: 20px 0 8px; }
+.section-img {
+  max-width: 100%;
+  border-radius: 16px;
+  border: 1px solid var(--line);
+}
+.org-chart {
+  margin: 24px 0 8px;
+  padding: 28px 20px 20px;
+  background: #fafbfc;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  overflow-x: auto;
+}
+.org-chart svg { display: block; margin: 0 auto; max-width: 100%; height: auto; }
+.org-chart .node-primary { fill: var(--blue); }
+.org-chart .node-secondary { fill: #fff; stroke: var(--blue); stroke-width: 1.5; }
+.org-chart .node-text { fill: #fff; font-family: Montserrat, sans-serif; font-size: 11px; font-weight: 700; }
+.org-chart .node-text-dark { fill: var(--ink); font-family: Montserrat, sans-serif; font-size: 10px; font-weight: 600; }
+.org-chart .node-sub { fill: var(--muted); font-family: Montserrat, sans-serif; font-size: 9px; }
+.org-chart .line { stroke: #b8cde8; stroke-width: 1.5; fill: none; }
+.org-chart .line-accent { stroke: var(--blue); stroke-width: 1.5; fill: none; stroke-dasharray: 5 3; }
+@media (max-width: 860px) {
+  .panel { padding: 24px 20px 28px; border-radius: 20px; }
+  .hero { padding: 32px 16px 40px; }
+  nav.toc a { font-size: 11px; padding: 5px 8px; }
+  table { font-size: 12px; }
+  th, td { padding: 8px 10px; }
+}
+@media print {
+  body { background: #fff; color: #000; }
+  body::before, body::after { display: none; }
+  .site-header, .hero-cta { display: none; }
+  .hero { padding: 0 0 20px; text-align: left; }
+  .hero-title, .hero-legal, .hero-contacts-label, .hero-contacts li { color: #000; text-shadow: none; }
+  .hero-contacts a { color: var(--blue); }
+  .panel { break-inside: avoid; box-shadow: none; background: #fff; border: 1px solid #ddd; }
+}
+</style>
 </head>
 <body>
 <div class="wrap">
-  <nav class="toc">
-    <a href="#p1">1</a><a href="#p2">2</a><a href="#p3">3</a><a href="#p4">4</a>
-    <a href="#p5">5</a><a href="#p6">6</a><a href="#p7">7</a><a href="#p8">8</a>
-    <a href="#p9">9</a><a href="#p10">10</a><a href="#p11">11</a><a href="#p12">12</a>
-    <a href="#p13">13</a><a href="#p14">14</a><a href="#p15">15</a><a href="#p16">16</a>
-    <a href="#p17">17</a><a href="#p18">18</a><a href="#p19">19</a><a href="#p20">20</a>
-  </nav>
-
+  <header class="site-header">
+    <p class="brand-script">Astoria Grande</p>
+    <nav class="toc" aria-label="Навигация по разделам"><a href="#p1">1</a><a href="#p2">2</a><a href="#p3">3</a><a href="#p4">4</a><a href="#p6">6</a><a href="#p7">7</a><a href="#p8">8</a><a href="#p9">9</a><a href="#p10">10</a><a href="#p11">11</a><a href="#p12">12</a><a href="#p13">13</a><a href="#p14">14</a><a href="#p15">15</a><a href="#p16">16</a><a href="#p17">17</a><a href="#p19">19</a><a href="#p20">20</a></nav>
+  </header>
   <section class="panel hero">
-    <p class="kicker">Коммерческое предложение · черновик v0.3</p>
-    <h1>Astoria Grande<br>Content Factory</h1>
-    <p class="lead">Оперативный новостной штаб на лайнере. Каждый день — короткий выпуск: что было, что будет, кто в кадре. Манера серьёзная, с лёгким юмором. Картинка ближе к репортажу и «Офису», чем к рекламе круиза.</p>
-    <div class="grid g3" style="margin-top:22px">
-      <div class="soft"><h4>Пилот на борту</h4><p class="muted" style="margin:0">Два оператора, штатный монтажёр, координатор. Ведущая — опция. Сценарист и второй монтаж — удаленно.</p></div>
-      <div class="soft"><h4>Рекомендуемый пилот</h4><p class="muted" style="margin:0">Запуск 280 000 ₽ + 3 × 1 790 000 ₽ = 5 650 000 ₽ без НДС</p></div>
-      <div class="soft"><h4>До подачи</h4><p class="muted" style="margin:0">Юрлицо, ФИО команды. Пункт 14 — вставить кейсы.</p></div>
-    </div>
-  </section>
-
-  <section class="panel">
-    <p class="kicker">Контекст, без которого нельзя писать сценарии</p>
-    <h2>Это уже средиземноморский продукт с русской речью</h2>
-    <p>Лайнер: 11 палуб, 593 каюты, театр Grande, шведский стол и анимация в цене, русский язык, оплата в том числе в рублях. Генеральный агент — СК «Аквилон». С августа 2026 порт оборота — Анталья. Маршруты сезона: Турция, Греция, Египет, Италия, Хорватия, Франция, Мальта. Около 30% гостей возвращаются. Эдуардо Агаджанов уже медийное лицо продукта.</p>
-    <div class="grid g2">
-      <div class="soft">
-        <h4>Каналы, которые кормим, а не подменяем</h4>
-        <p>Сайт astoriagrande.com · Telegram t.me/astoriagrande ~50,6k · VK vk.com/astoria.grande · Instagram Reels, TikTok, YouTube Shorts — приоритет ТЗ. Точные охваты и контент-микс снимаем на стратегической сессии с SMM.</p>
-      </div>
-      <div class="soft">
-        <h4>Возражения, которые контент обязан закрывать</h4>
-        <p>Анталья = сложно. Непонятно, что входит. Внутренняя каюта = подвал. С детьми неудобно. Нужна ли виза. Алкоголь и экскурсии «развод». «Это не настоящий круиз».</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- 1 -->
-  <section class="panel" id="p1">
-    <p class="kicker">Пункт 1</p>
-    <h2>Концепция Content Factory и видение пилота на 3 месяца</h2>
-    <p>Astoria Grande Content Factory — это <strong>оперативный новостной штаб на борту</strong>, а не рекламный отдел и не SMM. Лайнер каждый день производит события: посадка, порт, шоу, кухня, погода, мелкие сбои сервиса, праздник на палубе. Штаб это снимает, как служба новостей снимает город: утром — выпуск, днём — сюжеты, вечером — эфир и разбор.</p>
-    <p>Визуальный язык — <strong>репортаж в манере сериала «Офис»</strong>: камера в руках, взгляд в объектив, герой продолжает говорить, пока оператор перестраивается, лёгкая неловкость живого момента. Это не постановка «улыбнитесь, мы снимаем круиз». Это ощущение, что на корабле есть своя редакция, и она успевает на всё важное.</p>
-    <h3>Как выглядит выпуск</h3>
-    <div class="grid g2">
-      <div class="soft">
-        <h4>Утренний слот — «что сегодня на Астории»</h4>
-        <p class="muted" style="margin:0">Короткий репортаж 20–40 сек: что произошло за ночь и вчера вечером, что в Daily Program, какой порт, какое шоу, есть ли экстренное (задержка швартовки, смена ветра, тематический ужин). Тон ведущей или закадра — спокойный, почти новостной, с одной тёплой шуткой, не стендап.</p>
-      </div>
-      <div class="soft">
-        <h4>День — сюжеты и интервью</h4>
-        <p class="muted" style="margin:0">Плановые герои ТЗ плюс то, что случилось: очередь на трапе, блюдо шефа, репетиция оркестра, вопрос гостя. Операторы реагируют сразу: один держит talking head, второй берёт деталь или дрон-план (только там, где можно).</p>
-      </div>
-      <div class="soft">
-        <h4>Экстренное — не драма, а сервис</h4>
-        <p class="muted" style="margin:0">Смена порта, очередь, «почему мы стоим». Серьёзно, без паники, с официальной формулировкой. Юмор только если ситуация безопасная: «новость часа — круассаны кончились на шведском, расследование продолжается».</p>
-      </div>
-      <div class="soft">
-        <h4>Что штаб не делает</h4>
-        <p class="muted" style="margin:0">Не ведёт официальные аккаунты вместо SMM. Не изображает телеканал с бегущей строкой и пафосом. Не снимает служебное, документы, лица детей без согласий. Не обещает миллион на ролик.</p>
-      </div>
-    </div>
-    <h3>Тон: серьёзно, с лёгким юмором</h3>
-    <ul>
-      <li>Факты о визах, цене, безопасности — без шуток.</li>
-      <li>Быт лайнера — можно улыбнуться: взгляд в камеру, пауза, одна точная реплика.</li>
-      <li>Ведущая (если утверждена) — корреспондент на месте, не аниматор и не рекламный голос.</li>
-      <li>Герои экипажа говорят как люди на работе, как в «Офисе»: не заученный текст, но и не хаос.</li>
+    <p class="hero-title">Коммерческое предложение от Paramonov Production,<br>в лице ИП Парамонова Антона</p>
+    <p class="hero-legal">ИНН 634505487928<br>ОГРН 325632700177819</p>
+    <p class="hero-contacts-label">Контакты:</p>
+    <ul class="hero-contacts">
+      <li>тел. <a href="tel:+79189142789">89189142789</a></li>
+      <li>телеграм: <a href="https://t.me/anton_twozero" target="_blank" rel="noopener">anton_twozero</a></li>
+      <li>e-mail: <a href="mailto:paramanov.a@gmail.com">paramanov.a@gmail.com</a></li>
     </ul>
-    <h3>Пилот 3 месяца — зачем он штабу</h3>
-    <div class="table-wrap">
-      <table>
-        <tr><th>Недели</th><th>Что происходит</th><th>Что заказчик получает</th><th>Решение</th></tr>
-        <tr><td>−2…0 запуск</td><td>Стратессия, брендбук, стоп-темы, слоты с круиз-директором. Решение: нужна ли ведущая в кадре. Сетка «утренний выпуск / сюжет дня / вечер». Юрпакет. Связь и бэкап.</td><td>Регламент штаба, формы согласий, шаблон утреннего выпуска, список лиц аппрува.</td><td>Публикует SMM. Кто утверждает оперативку за 4 часа.</td></tr>
-        <tr><td>1–4 месяц 1</td><td>Первый круиз. Обкатка ритма новостей, звука, дрона, «Офиса» в каютах и на палубе. Понимаем, какие слоты экипажа реальны.</td><td>Ежедневные выпуски + сюжеты. Стоп-лист. Что команде нужно для автономии.</td><td>Ведущая остаётся / уходим на закадр. Какие рубрики новостей живые.</td></tr>
-        <tr><td>5–8 месяц 2</td><td>Штаб уже не «настраивается», а выдаёт. Серии героев + победители утра. Рекламные версии без трендового звука.</td><td>Узнаваемый формат выпуска. Пакет менеджерам.</td><td>Три отдельные сети пункта 11 — тест или нет.</td></tr>
-        <tr><td>9–12 месяц 3</td><td>Автономия: удаленный сценарист и монтажёр ведут контур, борт снимает новости без ручного управления из офиса. Библиотека 2027. Защита.</td><td>Архив, отчёт, модель на 6 месяцев и на 18 круизов.</td><td>Продолжить / сузить / закрыть по таблице.</td></tr>
-      </table>
-    </div>
-    <p>Три потока внутри штаба: <strong>выпуск дня</strong> (новость) → <strong>сюжет</strong> (герой, интервью, «Офис») → <strong>продажа</strong> (возражение, UTM, каюта, маршрут). Итог 90 дней — не папка роликов, а работающая редакция, которой после пилота не нужен постоянный «ручной привод» с берега.</p>
+    <a class="hero-cta" href="#p1">Смотреть предложение</a>
   </section>
-
-  <!-- 2 -->
-  <section class="panel" id="p2">
-    <p class="kicker">Пункт 2</p>
-    <h2>Собственное видение модели работы, если подрядчик предлагает альтернативу базовому формату ТЗ, с обоснованием эффективности</h2>
-    <p>База ТЗ — два человека на круизе: оператор вертикали и сценарист-продюсер. Для новостного штаба этого мало: выпуск каждый день, дрон, фото, интервью, экстренные сюжеты и монтаж «сегодня к вечеру» одним оператором не закрываются. Предлагаем <strong>пилотную ячейку штаба + обязательный удалённый контур</strong>. Три месяца нужны, чтобы понять, как люди ходят по лайнеру, какие слоты реальны, что лишнее. После пилота ячейка работает <strong>автономно</strong>: берег не дирижирует каждой съёмкой.</p>
-    <h3>Состав пилота — кто на борту</h3>
-    <div class="table-wrap">
-      <table>
-        <tr><th>№</th><th>Роль</th><th>Обязательность</th><th>Зачем в штабе</th></tr>
-        <tr><td>1</td><td>Оператор основной, с навыком дрона</td><td>Да</td><td>Картинка выпуска, talking head, воздух над палубой и корпусом там, где разрешено. Реакция на новость «прямо сейчас».</td></tr>
-        <tr><td>2</td><td>Оператор второй, с сильным фото</td><td>Да</td><td>Второй угол «Офиса», портреты, детали сервиса, обложки, стоп-кадры для Telegram и сайта. Пока первый держит героя, второй берёт сцену.</td></tr>
-        <tr><td>3</td><td>Монтажёр штатный</td><td>Да, на борту</td><td>Утренний выпуск и оперативка не ждут берега. Без штатного монтажа новость умирает к ночи.</td></tr>
-        <tr><td>4</td><td>Ведущая — корреспондент штаба, она же сценарист на месте</td><td>Опция. Включаем, если концепция новостей утверждена</td><td>Лицо выпуска, стендапы, мосты между сюжетами. Не анимация. Если не утверждена — закадр + герои экипажа.</td></tr>
-        <tr><td>5</td><td>Координатор</td><td>Да</td><td>Daily Program, слоты, согласия, очередь в SMM, связь с удалёнными. Чтобы операторы снимали, а не искали Wi‑Fi и бумажки.</td></tr>
-      </table>
-    </div>
-    <h3>Кто всегда на берегу — не опция</h3>
-    <ul>
-      <li><strong>Основной сценарист — удалённо.</strong> Сетка выпусков на рейс, карточки сюжетов, фактчек с Аквилоном, правки текстов ведущей. На борту ей дублирует ведущая (если есть) или координатор по карточкам.</li>
-      <li><strong>Монтажёр удалённый — обязательно.</strong> Серии, рекламные версии, субтитры, адаптации площадок. Штатный на корабле закрывает «сегодня». Удалённый закрывает качество и объём 200/300.</li>
-    </ul>
-    <h3>Почему это эффективнее двух человек из ТЗ</h3>
-    <ul>
-      <li>Новость и сериал не дерутся за одного человека с камерой.</li>
-      <li>Дрон и фото — разные тела и разный глаз. В одном специалисте это обычно «и то и другое на тройку».</li>
-      <li>Штатный монтаж на борту даёт SLA «день / +1», которое ТЗ прямо просит.</li>
-      <li>Удалённый сценарист и монтажёр снимают выгорание и держат фактчек, пока борт бежит за событием.</li>
-      <li>Пилот специально «толще», чем жизнь после него: смотрим, кого можно не брать на каждый рейс. Автономия — цель месяца 3, не обещание дня 1.</li>
-    </ul>
-    <p>Публикацию и комьюнити в пилот не берём. Каюты: минимум 2 twin (операторы + монтажёр; ведущая — третья каюта или подселение по этике). Дрон — только в разрешённых зонах и окнах, без съёмки служебного и береговых запретов.</p>
-  </section>
-
-  <!-- 3 -->
-  <section class="panel" id="p3">
-    <p class="kicker">Пункт 3</p>
-    <h2>Состав команды, роли, опыт ключевых специалистов и резервный состав</h2>
-    <p>Имена и портфолио вставляются до подачи. Ниже — оргструктура, без которой смета — это просто круглое число. Ставки — ориентир 2026, без НДС, «грязными» на подрядчика (налоги и соцвзносы внутри нашей экономики).</p>
-    <h3>Ставки по ролям</h3>
-    <div class="table-wrap">
-      <table>
-        <tr><th>Роль</th><th>Где</th><th>Ставка / день</th><th>Неделя 5 дней</th><th>Занятость в месяце A</th><th>Месяц в пакете A</th></tr>
-        <tr><td>Креативный продюсер / шоураннер</td><td>Борт + берег</td><td>14 000 ₽</td><td>70 000 ₽</td><td>20 дней: 4 подготовка, 10 борт, 6 берег</td><td>280 000 ₽</td></tr>
-        <tr><td>Оператор-монтажёр 9:16</td><td>Борт</td><td>13 000 ₽</td><td>65 000 ₽</td><td>20 дней (съёмка + ночные оперативки)</td><td>260 000 ₽</td></tr>
-        <tr><td>Монтажёр серий и рекламы</td><td>Берег</td><td>9 500 ₽</td><td>47 500 ₽</td><td>19 дней</td><td>180 000 ₽</td></tr>
-        <tr><td>Контент-координатор</td><td>Берег</td><td>7 500 ₽</td><td>37 500 ₽</td><td>20 дней</td><td>150 000 ₽</td></tr>
-        <tr><td>Аналитик</td><td>Берег</td><td>10 000 ₽</td><td>20 000 ₽ (2 дня)</td><td>8 дней</td><td>80 000 ₽</td></tr>
-        <tr><td>Юридический retainer</td><td>Внешний / штат</td><td>—</td><td>—</td><td>Согласия, музыка, кризис</td><td>40 000 ₽</td></tr>
-        <tr><td><strong>Фонд людей A</strong></td><td></td><td></td><td></td><td><strong>~5,4 FTE-эквивалента, не 5 полных ставок</strong></td><td><strong>990 000 ₽</strong></td></tr>
-      </table>
-    </div>
-    <h3>Что делает каждый — не абстрактные «креатив и продакшн»</h3>
-    <div class="grid g2">
-      <div class="soft">
-        <h4>Продюсер</h4>
-        <p>Рубрикатор, слоты капитана/Эдуардо/шефа, сценарии, этика гостя, связь с отелем и SMM, стоп-съёмка. Не снимает «на всякий случай 4 часа палубы».</p>
-      </div>
-      <div class="soft">
-        <h4>Оператор-монтажёр</h4>
-        <p>Картинка, петлицы, свет в каюте, бэкап, оперативный cut до 40 сек. Не отдаёт «сырьё без смысла» на берег как норму — только как исходник к серии.</p>
-      </div>
-      <div class="soft">
-        <h4>Монтажёр берега</h4>
-        <p>Серии, безопасные зоны титров, две версии хука, рекламный звук, версии с CTA и без.</p>
-      </div>
-      <div class="soft">
-        <h4>Координатор</h4>
-        <p>Архив «рейс / дата / герой / права», очередь согласований, UTM, статусы, напоминания назначенным лицам заказчика.</p>
-      </div>
-    </div>
-    <h3>Резерв</h3>
-    <ul>
-      <li>Резервный оператор и резервный продюсер: тот же юрпакет, бриф, готовность вылета 72 часа. Ставка мобилизации, если вылетел вместо основного: как день оператора/продюсера + авиа.</li>
-      <li>Резервный монтажёр с доступом к шаблонам проекта — выход из строя берега не останавливает оперативку.</li>
-      <li>На борту всегда есть человек с правом остановить съёмку: жалоба гостя, указание капитана, безопасность.</li>
-    </ul>
-    <p class="muted">До подачи: в эту таблицу вписываются ФИО, 4–6 строк опыта, 2 ссылки на вертикальные работы, гражданство/визы (для греко-итальянских рейсов это не мелочь).</p>
-  </section>
-
-  <!-- 4 -->
-  <section class="panel" id="p4">
-    <p class="kicker">Пункт 4</p>
-    <h2>Формат работы команды на борту и между рейсами, включая готовность к участию в последующих круизах при успешном пилоте</h2>
-    <h3>Статус и каюта</h3>
-    <p>Два специалиста. Каюта: одна двухместная, желательно с окном — ночной монтаж и сушка оборудования. Альтернатива: две внутренние. Питание — в статусе, который даст оперслужба, за счёт лайнера. Команда не занимает зрительские места шоу «чтобы снять красиво», не снимает в пик шведского стола толпу без согласий, не ходит на мостик без слота.</p>
-    <h3>Типовой день в море</h3>
-    <div class="table-wrap">
-      <table>
-        <tr><th>Время</th><th>Продюсер</th><th>Оператор</th></tr>
-        <tr><td>07:30</td><td>Планёрка, Daily Program, погода, слоты</td><td>Бэкап ночи, зарядка, петлицы</td></tr>
-        <tr><td>08:15–09:30</td><td>Согласия на завтраке точечно, не ковром</td><td>B-roll палубы / завтрак без лиц</td></tr>
-        <tr><td>10:00–12:00</td><td>Слот героя (капитан / шеф / стюард)</td><td>Съёмка по карточке, два хука</td></tr>
-        <tr><td>12:00–15:00</td><td>Продукт: каюта, «что входит», дети по слоту клуба</td><td>Интерьеры, детали сервиса</td></tr>
-        <tr><td>16:00–18:00</td><td>Гостевой сюжет, если есть согласие</td><td>Портрет + атмосфера</td></tr>
-        <tr><td>19:00–22:15</td><td>Эдуардо / театр, точки съёмки с круиз-директором</td><td>Шоу — короткие планы, не спектакль целиком</td></tr>
-        <tr><td>22:30–01:00</td><td>Карточки прав, текст к оперативке</td><td>Cut дня / +1, прокси в облако</td></tr>
-      </table>
-    </div>
-    <h3>Типовой день в порту</h3>
-    <p>Утро — оперативка «что успеть за 4 часа» в согласованном периметре (набережная, витрина, вид на лайнер). Не полноценный city-production: без дронов над портом, без погранзон, без чужих детей. Если нужен день «город как фильм» — это отдельная ставка пункта 9. Днём, пока гости на берегу, закрываем каюты и продукт. Вечером — шоу как в море.</p>
-    <h3>Между рейсами (часто 1–3 суток в Анталье + удалёнка)</h3>
-    <ul>
-      <li>Сдача мастеров, которые не ушли прокси.</li>
-      <li>Береговой монтаж серий и рекламы.</li>
-      <li>Разбор комментариев: каждый вопрос «а виза?», «а внутренняя?» становится карточкой следующего рейса.</li>
-      <li>Сценарный пакет следующего круиза: порты подставляются в тот же каркас.</li>
-    </ul>
-    <h3>Готовность к круизам после пилота</h3>
-    <p>Да. На горизонте «до 18 рейсов» закладываем ротацию: нельзя одними и теми же двумя людьми закрыть год без потери качества и этики. Схема: основной оператор на 12 рейсах, резервный на 6; продюсеры чередуют борт и берег. Иначе к рейсу 14 герои начнут прятаться, а это уже репутационный риск лайнера, не только наш.</p>
-  </section>
-
-  <!-- 5 -->
-  <section class="panel" id="p5">
-    <p class="kicker">Пункт 5</p>
-    <h2>Стоимость пилота продолжительностью 3 месяца</h2>
-    <p>Рекомендуем пилот на пакете A. Вариант B — если в пилоте уже два круиза в отдельные месяцы или заранее нужен объём 300.</p>
-    <div class="table-wrap">
-      <table>
-        <tr><th>Статья месяца A</th><th>Сумма</th><th>Зачем</th></tr>
-        <tr><td>Люди (таблица пункта 3)</td><td>990 000 ₽</td><td>Производство, а не «камера на палубе»</td></tr>
-        <tr><td>Продюсирование / офис / налоги внутри ставки</td><td>80 000 ₽</td><td>Договоры, бухгалтерия, контроль качества</td></tr>
-        <tr><td>Per diem 2 чел. × 10 судовых дней × 4 000 ₽</td><td>80 000 ₽</td><td>Не путать с каютой и питанием лайнера</td></tr>
-        <tr><td>Авиа и трансферы 2 чел. Анталья</td><td>180 000 ₽</td><td>1 круиз в месяце; багаж оборудования</td></tr>
-        <tr><td>Амортизация комплекта</td><td>90 000 ₽</td><td>Камеры, свет, петлицы, SSD, страховка в пакете</td></tr>
-        <tr><td>Софт, облако, лицензии музыки</td><td>35 000 ₽</td><td>Adobe/эквивалент, диск, коммерческий звук</td></tr>
-        <tr><td>Страховка оборудования и выезда</td><td>25 000 ₽</td><td></td></tr>
-        <tr><td>Накладные 25% на фонд людей</td><td>247 500 ₽</td><td>Резерв замены, простои погоды, связь</td></tr>
-        <tr><td>Контур качества / запас</td><td>62 500 ₽</td><td>Пересъём хука, срочный монтаж внутри SLA</td></tr>
-        <tr><td><strong>Итого месяц A</strong></td><td><strong>1 790 000 ₽</strong></td><td>Без кают, без НДС, без медиабаинга</td></tr>
-      </table>
-    </div>
-    <div class="table-wrap">
-      <table>
-        <tr><th>Пакет пилота</th><th>Состав</th><th>Сумма</th></tr>
-        <tr><td>Запуск, разово</td><td>Стратессия, библия, юрпакет, шаблоны, 12+ карточек рейса 1</td><td>280 000 ₽</td></tr>
-        <tr><td>3 месяца A</td><td>3 × 1 790 000, по одному круизу в месяц в ставке</td><td>5 370 000 ₽</td></tr>
-        <tr><td><strong>Пилот, который рекомендуем</strong></td><td><strong>Запуск + A</strong></td><td><strong>5 650 000 ₽</strong></td></tr>
-        <tr><td>Пилот B</td><td>Запуск + 3 × 2 390 000</td><td>7 450 000 ₽</td></tr>
-        <tr><td>Второй круиз внутри месяца A</td><td>Маржинально, см. пункт 7</td><td>+ 920 000 ₽</td></tr>
-      </table>
-    </div>
-    <p class="muted">Не входит в пилот: каюты и питание на лайнере, шенген команды, алкоголь/SPA/экскурсии команды, закупка трафика, публикация, отдельные аккаунты, полноценная съёмка в порту.</p>
-  </section>
-
-  <!-- 6 -->
-  <section class="panel" id="p6">
-    <p class="kicker">Пункт 6</p>
-    <h2>Стоимость модели до 200 единиц контента в месяц и до 300 единиц контента в месяц с разбивкой по типам материалов</h2>
-    <p>Единица — самостоятельный смысл: новый оригинал, оперативка, адаптация с другим хуком/длиной/CTA/площадкой, рекламная версия, материал в резерв. Обрезать конец и сдать как вторую единицу нельзя.</p>
-    <div class="table-wrap">
-      <table>
-        <tr><th>Тип</th><th>A · 200</th><th>B · 300</th><th>Что это на практике за месяц с 1 круизом</th></tr>
-        <tr><td>Оригиналы (серия, герой, продукт)</td><td>48</td><td>70</td><td>A: ~6 в сутки рейса + добор с берега. Не 48 разных «закатов».</td></tr>
-        <tr><td>Оперативка день или +1</td><td>36</td><td>54</td><td>Порт, шоу, погода, инфоповод. Короткий cut на борту.</td></tr>
-        <tr><td>Адаптации площадок</td><td>56</td><td>84</td><td>Другой хук, обложка, длина, безопасные зоны Reels vs VK vs Shorts vs TG.</td></tr>
-        <tr><td>Рекламные / rights-safe</td><td>24</td><td>36</td><td>Другая музыка, дисклеймеры, чистые концы под UTM.</td></tr>
-        <tr><td>Резерв / библиотека 2027</td><td>36</td><td>56</td><td>Каюты, визы, посадка, дети, «что входит» — живут дольше рейса.</td></tr>
-        <tr><td>Месяц</td><td>1 790 000 ₽</td><td>2 390 000 ₽</td><td>B: +ёмкость монтажа, моушн, опция 3-го на 1 рейсе</td></tr>
-        <tr><td>Справочно за единицу</td><td>~8 950 ₽</td><td>~7 970 ₽</td><td>Не прайс «ролик под ключ»</td></tr>
-      </table>
-    </div>
-    <h3>Откуда +600 000 ₽ в пакете B</h3>
-    <div class="table-wrap">
-      <table>
-        <tr><th>Статья</th><th>Сумма</th></tr>
-        <tr><td>Третий специалист на одном рейсе месяца (оператор или guest-producer)</td><td>180 000 ₽</td></tr>
-        <tr><td>Монтажёр +4 дня и моушн-пакет</td><td>160 000 ₽</td></tr>
-        <tr><td>Координатор + аналитик, большая очередь единиц</td><td>90 000 ₽</td></tr>
-        <tr><td>Облако, музыка, переработки оперативки</td><td>70 000 ₽</td></tr>
-        <tr><td>Накладные и запас качества</td><td>100 000 ₽</td></tr>
-        <tr><td><strong>Итого дельта B − A</strong></td><td><strong>600 000 ₽</strong></td></tr>
-      </table>
-    </div>
-    <p>Площадки пилота по приоритету: Reels и TikTok (тест охвата), VK Клипы (35+ и агенты), Telegram (нарезка в уже тёплые 50k), Shorts (склад серий и запросы «каюта / виза / Анталья»). Полный набор адаптаций утверждается после месяца 1.</p>
-  </section>
-
-  <!-- 7 -->
-  <section class="panel" id="p7">
-    <p class="kicker">Пункт 7</p>
-    <h2>Стоимость участия команды в одном круизе, включая подготовку, работу на борту, монтаж, постпродакшн, передачу материалов, логистику, оборудование, количество специалистов, потребность в каютах и перечень включённых/не включённых расходов</h2>
-    <p>Средняя длительность ~8 ночей. Считаем, чтобы можно было сравнивать нас с теми, кто продаёт «рейс», а не месяц.</p>
-    <div class="table-wrap">
-      <table>
-        <tr><th>Блок</th><th>Люди × дни</th><th>Ставка</th><th>Сумма</th></tr>
-        <tr><td>Подготовка берег</td><td>Продюсер 4 дн + оператор 2 дн + координатор 2 дн</td><td>14k / 13k / 7,5k</td><td>56 + 26 + 15 = 97 000 ₽</td></tr>
-        <tr><td>Сценарный запас и фактчек</td><td>Продюсер + координатор, уже частично выше; добор</td><td>—</td><td>83 000 ₽ до 180 000 ₽ блока «подготовка» целиком</td></tr>
-        <tr><td>Борт</td><td>2 чел. × 10 суток × (14k + 13k)</td><td>27 000 ₽ / судосутки пары</td><td>270 000 ₽ фонд. В пакете круиза 720 000 ₽ с ночными монтажными, рисками, накладными борта</td></tr>
-        <tr><td>Пост на берегу</td><td>Монтажёр 7 дн + продюсер 3 дн + координатор 3 дн</td><td>9,5 / 14 / 7,5</td><td>66,5 + 42 + 22,5 ≈ 131 000 ₽ фонд → в пакете 280 000 ₽ с графикой и двумя кругами</td></tr>
-        <tr><td>Архив и передача</td><td>Координатор 2 дн</td><td></td><td>40 000 ₽ в пакете</td></tr>
-        <tr><td>Логистика</td><td>2 авиа, 4 трансфера, багаж, медстраховка выезда</td><td></td><td>180 000 ₽</td></tr>
-        <tr><td>Оборудование</td><td>Амортизация рейса</td><td></td><td>90 000 ₽</td></tr>
-        <tr><td><strong>Пакет «круиз под ключ»</strong></td><td><strong>2 специалиста</strong></td><td></td><td><strong>1 490 000 ₽</strong></td></tr>
-        <tr><td>Маржинальный 2-й круиз в уже оплаченном месяце A</td><td>Берег частично уже есть</td><td></td><td><strong>920 000 ₽</strong></td></tr>
-      </table>
-    </div>
-    <div class="grid g2">
-      <div class="soft">
-        <h4>Включено в 1 490 000 ₽</h4>
-        <p>Съёмка и оперативка по плану, субтитры, обложки, карточки, архив, согласия нашими формами, логистика Анталья в расчёте, страховка комплекта, один круг правок по SLA.</p>
-      </div>
-      <div class="soft">
-        <h4>Не включено</h4>
-        <p>Каюта и питание, шенген, портовые разрешения на постановку в городе, алкоголь/SPA/экскурсии команды, медиабаинг, публикация, горизонталь, срочная съёмка вне плана, третий человек.</p>
-      </div>
-    </div>
-    <p><strong>Каюты:</strong> 1 twin (приоритет) или 2 внутренние. На рейсе с 3 людьми — 2 каюты. Это ресурс лайнера, его надо бронировать так же серьёзно, как слот капитана.</p>
-    <p><strong>Комплект:</strong> две камеры/смартфона 4K 9:16, запас питания, 4 SSD, 2 петлицы + запас, стабилизатор, карманный свет, дождь, контроль звука.</p>
-  </section>
-
-  <!-- 8 -->
-  <section class="panel" id="p8">
-    <p class="kicker">Пункт 8</p>
-    <h2>Ориентировочный годовой расчёт при участии команды до 18 круизов в год, со средней продолжительностью рейса около 8 ночей</h2>
-    <p>Ориентир для сопоставления, не обязательство Аквилона загрузить 18 рейсов. 18 × 8 ночей ≈ 144 ночи в море плюс посадки: это почти постоянная вахта, поэтому в годе сидит ротация.</p>
-    <div class="table-wrap">
-      <table>
-        <tr><th>Сценарий</th><th>Как считаем</th><th>Люди на воде</th><th>Год</th></tr>
-        <tr><td>A, 12 круизов</td><td>12 × 1 790 000</td><td>2</td><td>21 480 000 ₽</td></tr>
-        <tr><td>A, до 18 круизов</td><td>12 мес. A + 6 × 920 000</td><td>2, резерв на 6 рейсах</td><td>26 999 000 ₽ ≈ 27,0 млн</td></tr>
-        <tr><td>B, 12 круизов</td><td>12 × 2 390 000</td><td>2–3</td><td>28 680 000 ₽</td></tr>
-        <tr><td>B, до 18 круизов</td><td>12 мес. B + 6 × 1 150 000</td><td>2–3</td><td>35 580 000 ₽</td></tr>
-        <tr><td>Гибрид после пилота</td><td>A как база + 4 геро-рейса с 3-м человеком + фонд тестов</td><td>2 / 3</td><td>29,5–31,0 млн</td></tr>
-      </table>
-    </div>
-    <p>Каюты на стороне заказчика: 18 × 1 twin минимум. Авиа сверх «1 круиз в месяце» внутри 6 дополнительных рейсов сидит в 920 000. Медиабаинг и отдельные аккаунты в год не входят.</p>
-  </section>
-
-  <!-- 9 -->
-  <section class="panel" id="p9">
-    <p class="kicker">Пункт 9</p>
-    <h2>Отдельная стоимость дополнительных работ: дополнительный съёмочный день, оператор, монтажёр, срочная съёмка, рекламная адаптация, горизонтальное видео, съёмка в порту, запуск и ведение отдельного аккаунта</h2>
-    <p class="muted">К версии 0.2 позиции этого пункта снижены на 20%. Ориентир без НДС.</p>
-    <div class="table-wrap">
-      <table>
-        <tr><th>Позиция</th><th>Кто и сколько</th><th>Что входит</th><th>Ориентир</th></tr>
-        <tr><td>Доп. съёмочный день 10 ч</td><td>Продюсер + оператор</td><td>Съёмка, оперативный cut, 1 круг. Без авиа.</td><td>88 000 ₽</td></tr>
-        <tr><td>Оператор на весь рейс 8 ночей</td><td>1 чел. × ~12 дней + авиа</td><td>Второй угол шоу, порт, подмена</td><td>336 000 ₽</td></tr>
-        <tr><td>Монтажёр, срочный день</td><td>10 ч</td><td>До 4 оперативок или 1 серия</td><td>60 000 ₽</td></tr>
-        <tr><td>Срочная съёмка вне плана</td><td>Слот 4 ч, оба на борту</td><td>Приоритет над планом. Не «каждый закат»</td><td>68 000 ₽</td></tr>
-        <tr><td>Рекламная адаптация готового</td><td>Монтажёр 0,5–1 дн + юр. звук</td><td>Музыка, дисклеймер, CTA, чистые поля</td><td>18 000 ₽</td></tr>
-        <tr><td>Горизонталь до 60 сек с вертикали</td><td>Монтаж + рефрейм</td><td>Не новая съёмка</td><td>36 000 ₽</td></tr>
-        <tr><td>Горизонталь 90–150 сек, новая съёмка</td><td>Продюсер + оператор + монтаж 3–4 дн</td><td>Имидж / сайт / презентации агентам</td><td>144 000 ₽</td></tr>
-        <tr><td>Порт, полноценный береговой день</td><td>2 чел. 10 ч</td><td>Маршрут, разрешения заказчика. Дрон — только если разрешён</td><td>76 000 ₽ + расходы</td></tr>
-        <tr><td>Запуск отдельного аккаунта</td><td>Стратег 3 дн + оформление + 2 нед прогрева из фабрики</td><td>Без новой съёмочной группы</td><td>176 000 ₽</td></tr>
-        <tr><td>Ведение аккаунта</td><td>Модератор 0,3 + продюсер 3 ч/нед</td><td>5–7 оригиналов/нед из потока, 5/2 ответы</td><td>144 000 ₽ / мес</td></tr>
-        <tr><td>Публикация офиц. каналов</td><td>Контент-менеджер</td><td>Опция, если SMM отдаёт слот</td><td>128 000 ₽ / мес</td></tr>
-      </table>
-    </div>
-  </section>
-
-  <!-- 10 -->
-  <section class="panel" id="p10">
-    <p class="kicker">Пункт 10</p>
-    <h2>Подход к работе со стартовыми героями и предложения по дополнительным или альтернативным героям на борту</h2>
-    <p>Стартовые герои ТЗ — гипотеза, не святые. В пилоте проверяем комфорт в кадре, слоты, юридию и влияние на вопросы про продукт. Если капитан деревянный, а стюард держит удержание — усиливаем стюарда, капитана оставляем точечно.</p>
-    <h3>Капитан — доверие после смены порта</h3>
-    <div class="grid g2">
-      <div class="idea"><strong>Серия «Меня спрашивают в 2 ночи»</strong>20–30 сек, один вопрос: шторм, ночь, «мы точно придём», Анталья vs открытое море. Без радаров и карт закрытых зон. Хук: вопрос гостя текстом на экране.</div>
-      <div class="idea"><strong>«Зачем вышли сегодня»</strong>Крыло мостика, 15 сек, без терминов. Смысл: есть человек, который отвечает головой, не «кораблик поехал».</div>
-      <div class="idea"><strong>Коктейль с капитаном как ритуал</strong>Не премиум-пафос. Гости по согласиям, капитан 2 фразы, титр «это входит».</div>
-      <div class="idea"><strong>Стоп</strong>Никакой «драмы безопасности», никаких намёков на обстановку в Чёрном море кроме утверждённой формулировки PR.</div>
-    </div>
-    <h3>Эдуардо Агаджанов — эмоция, уже известная гостям</h3>
-    <div class="grid g2">
-      <div class="idea"><strong>«90 секунд до занавеса»</strong>Таймер, грим, выход, спины зала. Нельзя сорвать номер.</div>
-      <div class="idea"><strong>Интерактив с гостем</strong>Только согласие. Мост: «вечером ты в театре, днём — в новом порту».</div>
-      <div class="idea"><strong>День Эдуардо не только сцена</strong>Короткий мост к семьям / палубе, чтобы не запереть бренд в «дискотеке». Иначе 45+ в VK отвалится.</div>
-      <div class="idea"><strong>Риск</strong>Выгорание и пересечение со шоу. Слот фиксируем с круиз-директором, не ловим в проходе.</div>
-    </div>
-    <h3>Шеф — еда как доказательство уровня</h3>
-    <div class="grid g2">
-      <div class="idea"><strong>«Блюдо этого порта»</strong>Даже в море: «завтрак после ночи». Один продукт, одна команда кухни, 25 сек.</div>
-      <div class="idea"><strong>Selection честно</strong>«Это за доплату, вот зачем» — иначе комментарии взорвут «всё включено».</div>
-      <div class="idea"><strong>Шведский стол без порнографии еды</strong>Деталь, жест повара, лицо гостя по согласию. Не облёт 40 гастроёмкостей.</div>
-      <div class="idea"><strong>Слот</strong>Только вне пика. Камбуз — режимная зона, вход по указанию шефа.</div>
-    </div>
-    <h3>Дополнительный пул — не все сразу</h3>
-    <div class="table-wrap">
-      <table>
-        <tr><th>Герой</th><th>Зачем бренду</th><th>3 стартовые идеи</th><th>ЦА</th><th>Частота</th><th>Юридика</th><th>Когда в пилоте</th></tr>
-        <tr><td>Стюард</td><td>Каюта без страха, апселл честно</td><td>Внутренняя за 30 сек; turndown; «как попросить уборку»</td><td>Пары 35+</td><td>2–3 / рейс</td><td>Чужие каюты и бирки — нет</td><td>Месяц 1</td></tr>
-        <tr><td>Первый круизник</td><td>Проводник страха</td><td>Посадка; «укачает?»; первая ночь</td><td>Новички</td><td>1 сюжет / рейс</td><td>Право выйти из кадра</td><td>Месяц 1</td></tr>
-        <tr><td>Детский клуб</td><td>Семьи едут</td><td>Утро ребёнка; вечер родителей; «что если не клуб»</td><td>30–45</td><td>2 / рейс</td><td>Только согласия родителей, лица — по правилам</td><td>Месяц 2</td></tr>
-        <tr><td>Экскурсионка</td><td>Порт без «развода»</td><td>Пешком за 4 часа; когда группа стоит денег; «не успеете вот это»</td><td>Все</td><td>Каждый порт</td><td>Цены — только из карточки Аквилона</td><td>Месяц 2</td></tr>
-        <tr><td>Постоянный гость</td><td>30% repeat как социальное доказательство</td><td>«Почему в третий раз»; Сочи vs Анталья; кому советую</td><td>Сомневающиеся</td><td>1–2 / рейс</td><td>Не заказной отзыв</td><td>Месяц 2</td></tr>
-        <tr><td>Офицер мостика</td><td>Экспертиза без перегруза капитана</td><td>Погода простыми словами; огни порта; «кто не спит»</td><td>35+, мужская</td><td>1 / рейс</td><td>Аппрув службы</td><td>Месяц 2–3</td></tr>
-        <tr><td>Врач</td><td>Море не равно опасно</td><td>Укачивание; аптечка; страховка</td><td>Семьи, 45+</td><td>1 / 2 рейса</td><td>Никакой медтайны</td><td>Месяц 3, если слот</td></tr>
-        <tr><td>Бармен / музыкант</td><td>Вечер, но алкоголь платный</td><td>Ритуал коктейля; живая палуба</td><td>25–45</td><td>1–2 / рейс</td><td>Не маскировать доплату</td><td>Точечно</td></tr>
-      </table>
-    </div>
-    <p>К концу месяца 3 оставляем пять работающих лиц. Остальных выводим письменно в отчёте. Библия героев: слоты, стоп-слова, тон, кто замещает, если Эдуардо на тематическом рейсе перегружен.</p>
-  </section>
-
-  <!-- 11 -->
-  <section class="panel" id="p11">
-    <p class="kicker">Пункт 11</p>
-    <h2>При наличии предложения по отдельным аккаунтам — их цели, позиционирование, платформы, ресурсы, модель модерации, KPI, порядок владения аккаунтами и интеграцию с официальными каналами бренда</h2>
-    <p>Три отдельных аккаунта — не «ещё три витрины круиза». Задача: заходить к людям, которые <strong>едой, музыкой или техникой интересуются сами по себе</strong>, и только потом узнают, что это Astoria Grande. Официальные каналы остаются витриной продукта. Эти три — вход в интерес.</p>
-    <p>Запуск — после согласования. Логины, почта, телефон, аудитория, ролики — Astoria Grande в день старта. Кросс раз в неделю в Telegram и официальный Reels. Одни UTM. Модерация: SMM бренда или опция пункта 9. Политика, интим, служебное, чужие дети — снять за 2 часа.</p>
-
-    <h3>Аккаунт 1. Кухня / ресторан</h3>
-    <p>Не «наш шведский стол». Общий гастрономический профиль: лайфхаки, блюда, высокая кухня и простая еда, которую можно понять, даже если круиз вам сейчас не нужен.</p>
-    <div class="grid g2">
-      <div class="idea"><strong>Позиционирование</strong>Кухня на воде как ремесло. Шеф и смена — герои. Лайнер — кухня со сложной логистикой, не рекламный фон.</div>
-      <div class="idea"><strong>Площадки</strong>Reels + TikTok (короткие рецепты и лайфхаки). Telegram — карточки «почему так, а не иначе».</div>
-    </div>
-    <ul>
-      <li>Лайфхак: как не убить круассан на шведском; как есть морепродукты в день порта; что взять с собой в город, чтобы не искать еду.</li>
-      <li>Блюдо за 30 сек: одно, без облёта сорока гастроёмкостей.</li>
-      <li>Высокая кухня Selection — честно «это за доплату», техника, тарелка, жест.</li>
-      <li>Кухни маршрута: Турция, Греция, Италия, Франция — вкус порта, не стоковые руины.</li>
-      <li>Общий профиль: нож, тесто, соус, «почему рыба сегодня такая» — контент для тех, кто просто любит готовить.</li>
-    </ul>
-    <p><strong>Ресурсы.</strong> Слоты шефа 2–3 раза за рейс + съёмка штабом. 4–6 оригиналов в неделю на аккаунт (часть из потока фабрики). <strong>KPI 60 дней:</strong> сохранения, репосты в «кулинарные» чаты, вопросы не только «как на круиз», но и «как повторить». <strong>Риск:</strong> аллергены и названия блюд — только фактчек. Камбуз — режимная зона.</p>
-
-    <h3>Аккаунт 2. Творческий состав: музыканты, оркестр, сцена</h3>
-    <p>Не отчёт «вчера было шоу». Трендовые формы, которые живут сами: каверы, этюды, «один дубль», звук на палубе, взгляд музыканта в камеру по «Офису».</p>
-    <div class="grid g2">
-      <div class="idea"><strong>Позиционирование</strong>Живая музыка и сцена лайнера как маленькая труппа. Бренд в шапке, не в каждом кадре.</div>
-      <div class="idea"><strong>Площадки</strong>TikTok + Reels. Shorts — для целых каверов. VK — спокойнее, для 35+.</div>
-    </div>
-    <ul>
-      <li>Кавер 15–40 сек: знакомый хук, палуба на закате или пустой театр днём.</li>
-      <li>Этюд: настройка, фальшь, смех, повтор — вирус через человечность, не через «премьеру».</li>
-      <li>Один дубль оркестра / квартета. Тишина перед вступлением.</li>
-      <li>Музыкант отвечает на тренд звуком, не танцем капибара, если это не его язык.</li>
-      <li>Кросс с выпуском штаба: «сегодня в вечерних новостях — они».</li>
-    </ul>
-    <p><strong>Ресурсы.</strong> Слоты с круиз-директором, чтобы не сорвать шоу. Права на каверы: органика vs реклама — разные версии, как в ТЗ. 4–5 оригиналов в неделю. <strong>KPI:</strong> досмотры, звуковые репосты, прирост с «музыкальной» аудитории. <strong>Риск:</strong> чужой хит в ads без лицензии — нельзя. Артисты — отдельные согласия.</p>
-
-    <h3>Аккаунт 3. Техничка лайнера</h3>
-    <p>Не внутренний корпоратив экипажа. Формат, на который подписываются люди, которым нравятся большие машины: двигатели, водоизмещение, мощность, «как это устроено», сравнения с другими судами — в духе популярных технических каналов про корабли, без секретных схем и служебных коридоров.</p>
-    <div class="grid g2">
-      <div class="idea"><strong>Позиционирование</strong>Человек (механик / офицер / инженер — кто комфортен в кадре и согласован службой) спокойно объясняет машину. Юмор сухой, как у хорошего научпопа.</div>
-      <div class="idea"><strong>Площадки</strong>YouTube Shorts + Reels + TikTok. Длиннее сравнения — в Shorts. VK — для тех, кто любит цифры.</div>
-    </div>
-    <ul>
-      <li>Сколько весит, сколько везёт, какая мощность — одна цифра = один ролик, сравнение «это как N бассейнов / N грузовиков», без инфантильных метафор.</li>
-      <li>«Почему мы не тонем» / остойчивость простыми словами, после аппрува.</li>
-      <li>Винт, руль, якорная машина — только разрешённые точки, не машинное отделение без допуска.</li>
-      <li>Сравнение класса судна с гигантами рынка: честно, мы не Oasis. В этом и характер.</li>
-      <li>Виральное: «звук с палубы vs звук у машины» (если можно), таймлапс отхода, расход — только открытые цифры заказчика.</li>
-    </ul>
-    <p><strong>Ресурсы.</strong> Редкий слот службы, зато высокий чужой охват. 2–4 оригинала в неделю, много графики на берегу. <strong>KPI:</strong> новая аудитория «не про туризм», комменты с цифрами, переходы в официальный канал. <strong>Риск:</strong> безопасность, мостик, закрытые зоны — без аппрува нет ролика. Никаких карт, радаров крупно, никаких «дыр в борту».</p>
-
-    <div class="table-wrap">
-      <table>
-        <tr><th></th><th>Кухня</th><th>Творческий состав</th><th>Техничка</th></tr>
-        <tr><td>Цель</td><td>Еда как интерес вне круиза</td><td>Вирус звука и сцены</td><td>Техника как интерес вне круиза</td></tr>
-        <tr><td>ЦА шире продукта</td><td>Кулинария, рестораны</td><td>Музыка, каверы, тренды</td><td>Корабли, инженерия, «как это работает»</td></tr>
-        <tr><td>Интеграция</td><td>Блюдо порта → анонс рейса в шапке</td><td>Кавер → афиша вечера</td><td>Цифра → «это Astoria Grande», ссылка на бренд</td></tr>
-        <tr><td>Владение</td><td colspan="3">Все аккаунты, доступы и аудитория — Astoria Grande. Подрядчик ведёт по поручению.</td></tr>
-      </table>
-    </div>
-    <p class="muted">В пилоте не обязательно поднимать все три сразу. Рекомендуем: месяц 1 — только официальные каналы штаба. Месяц 2 — тест одного аккаунта (кухня или техничка — что даст служба). Месяц 3 — второй. Три сразу в неделю 1 размоют и слоты, и модерацию.</p>
-  </section>
-
-  <!-- 12 -->
-  <section class="panel" id="p12">
-    <p class="kicker">Пункт 12</p>
-    <h2>15–20 стартовых идей и не менее 5 подробно разработанных тем для первого рейса</h2>
-    <p>Пул на 8 ночей из Антальи. На рейсе снимаем 12–14, остальное — резерв погоды и отказа героя. У каждой идеи: зачем, хук, формат. Ниже восемь расписаны до сценария.</p>
-
-    <div class="idea"><strong>1. Из самолёта на трап</strong>Цель: Анталья не равна «всё пропало». Хук: чемодан + «вы думали, круиз начинается в Сочи». POV 30 сек. Подробно — тема A.</div>
-    <div class="idea"><strong>2. Первая минута каюты</strong>Карта, программа дня, халат, вид или его отсутствие. Хук: звук ключ-карты. Продукт, не «вау интерьер».</div>
-    <div class="idea"><strong>3. Капитан без терминов</strong>«Зачем мы вышли сегодня». 15–20 сек. Доверие.</div>
-    <div class="idea"><strong>4. Капитан, вопрос из Google</strong>Шторм / ночь / опоздание в порт. Серия. Подробно — тема B.</div>
-    <div class="idea"><strong>5. 90 секунд Эдуардо</strong>Таймер до занавеса. Эмоция. Подробно — тема C.</div>
-    <div class="idea"><strong>6. Внутренняя каюта, ожидание / реальность</strong>Главный страх цены. Подробно — тема D.</div>
-    <div class="idea"><strong>7. Что входит и что нет</strong>Честный красный/зелёный список. Подробно — тема E.</div>
-    <div class="idea"><strong>8. С детьми: утро там, вечер здесь</strong>Клуб → палуба родителей. Хук: «нам сказали, с ребёнком на корабле ад».</div>
-    <div class="idea"><strong>9. Порт за 4 часа пешком</strong>Экскурсионка честно говорит, когда группа не нужна. Хук: «не покупайте это».</div>
-    <div class="idea"><strong>10. Когда экскурсия стоит денег</strong>Парный ролик к №9. Конкретный порт рейса, утверждённая цена или «смотрите актуальную на борту».</div>
-    <div class="idea"><strong>11. Русский язык как продукт</strong>5 фраз за завтраком, которые слышишь. Хук: иностранец в кадре не нужен — нужен официант, который не переключает на английский.</div>
-    <div class="idea"><strong>12. Коктейль с капитаном</strong>Ритуал, не люкс-реклама. 20 сек.</div>
-    <div class="idea"><strong>13. Закат без слов</strong>Палуба, титр маршрута, 12 сек. Атмосферный клей ленты, не единица «ради KPI». Считаем как оперативку, не как серию.</div>
-    <div class="idea"><strong>14. Selection за доплату</strong>Честно. Хук: «вам не доскажут в красивом ролике».</div>
-    <div class="idea"><strong>15. «Я боялась, что укачает»</strong>Первый круизник. До/после. Аптечка только в рамках правил врача.</div>
-    <div class="idea"><strong>16. Постоянный гость, третий заход</strong>Почему Анталья не отменила желание ехать. Социальное доказательство.</div>
-    <div class="idea"><strong>17. Стюард, быт без стыда</strong>Как попросить полотенце. Сервис человеческий.</div>
-    <div class="idea"><strong>18. Три карточки виз</strong>Турция / Египет / Шенген. Только фактчек. Подробно — тема F.</div>
-    <div class="idea"><strong>19. Собери чемодан в круиз</strong>Реальные ошибки гостей: утюг, пять платьев, нет пиджака на капитанский вечер. Тренд-формат с пользой.</div>
-    <div class="idea"><strong>20. Какой круиз выбрать, если вы…</strong>Семья / пара / первый раз. Прямой мост на сайт. Подробно — тема G. Плюс запас: ночной мостик (тема H) — только с аппрувом.</div>
-
-    <h3>Тема A. «Из самолёта — на трап»</h3>
-    <div class="script">
-      <p><strong>Цель.</strong> Снять барьер логистики 2026. Коммерция: не потерять спрос после ухода Сочи.</p>
-      <p><strong>ЦА.</strong> Гости из РФ, кто бронировал «как раньше» или боится чартера.</p>
-      <p><strong>Герой / локация.</strong> Реальный гость с согласием. Трансфер, трап, ресепшен. Не снимаем хаос службы аэропорта крупно.</p>
-      <p><strong>Хук 1–3 сек.</strong> Колёса чемодана. Титр: «Круиз теперь из Антальи. Вот как это выглядит на самом деле».</p>
-      <p><strong>Сценарий ~32 сек.</strong> Чемодан в автобусе → вопрос «долго ехать?» → первый кадр корпуса → ключ-карта → каюта 2 сек → чай/вид на палубе. Финал: «Новая дверь в тот же дом». CTA: чартер и даты — сайт / шапка.</p>
-      <p><strong>Площадки.</strong> Reels, TikTok. VK — спокойнее, схема «самолёт–порт». Telegram — 3 кадра + ссылка.</p>
-    </div>
-    <h3>Тема B. «Капитан отвечает»</h3>
-    <div class="script">
-      <p><strong>Цель.</strong> Доверие. ЦА 35+, семьи, тревожные новички.</p>
-      <p><strong>Герой.</strong> Капитан, крыло / открытая палуба. Не карта, не радар.</p>
-      <p><strong>Хук.</strong> «Меня спрашивают: а если шторм?»</p>
-      <p><strong>Сценарий 22 сек.</strong> Вопрос титром → один ответ простыми словами → улыбка / вид моря. Это серия, не лекция. Согласование службы до съёмки.</p>
-      <p><strong>Реклама.</strong> Без шуток про безопасность. Shorts/Reels.</p>
-    </div>
-    <h3>Тема C. «90 секунд Эдуардо»</h3>
-    <div class="script">
-      <p><strong>Цель.</strong> Поехать ради вечера, не ради «кораблика». ЦА 25–45.</p>
-      <p><strong>Хук.</strong> Таймер на экране, «гости уже садятся».</p>
-      <p><strong>Сценарий 40 сек.</strong> Гримёрка → коридор → край занавеса → зал (спины, лица только с согласием) → одна реакция → титр «это каждый вечер, это входит».</p>
-      <p><strong>Нельзя.</strong> Сорвать номер, снять артистов без согласия, залить трендовым звуком чужой хит для ads.</p>
-    </div>
-    <h3>Тема D. «Кладовка»</h3>
-    <div class="script">
-      <p><strong>Цель.</strong> Внутренние каюты и снятие страха. ЦА цена-чувствительные.</p>
-      <p><strong>Хук.</strong> Чёрный кадр: «нам сказали, это кладовка».</p>
-      <p><strong>Сценарий 38 сек.</strong> Дверь → свет, душ, кровать → ТВ с носовой камерой (как в живых отзывах) → стюард 2 фразы → утро, выход на палубу → «окно и балкон про другое удовольствие, не про “можно ли ехать”». CTA: сравнить категории.</p>
-      <p><strong>Почему сработает.</strong> Гости сами это рассказывают в отзывах. Мы не выдумываем продукт.</p>
-    </div>
-    <h3>Тема E. «Что входит»</h3>
-    <div class="script">
-      <p><strong>Цель.</strong> Меньше раздражения на борту и в комментариях.</p>
-      <p><strong>Хук.</strong> «Вам не доскажут в красивом ролике».</p>
-      <p><strong>Сценарий 28 сек.</strong> Зелёный ряд: каюта, стол, анимация, бассейн, страховка по оферте. Красный: алкоголь, SPA, Selection, экскурсии. Только утверждённые формулировки. CTA: менеджер / сайт.</p>
-    </div>
-    <h3>Тема F. «Виза за 20 секунд»</h3>
-    <div class="script">
-      <p><strong>Цель.</strong> Не потерять греко-итальянские рейсы из-за путаницы и не подставить бренд неверным фактом.</p>
-      <p><strong>Хук.</strong> Три карточки, которые меняются по свайпу / склейке: Турция — паспорт. Египет — отдельный въездной. Греция/Италия — Шенген заранее, не на борту.</p>
-      <p><strong>Обязательно.</strong> Титр «уточняйте по вашему рейсу». Юрист + продукт Аквилона до публикации. Площадка: VK и Telegram сильнее TikTok.</p>
-    </div>
-    <h3>Тема G. «Если вы семья / пара / первый раз»</h3>
-    <div class="script">
-      <p><strong>Цель.</strong> Трафик на конкретные карточки круизов, не «море красивое».</p>
-      <p><strong>Формат.</strong> Три нарезки по 20 сек с одним визуальным каркасом. Хук: «не берите 14 ночей, если…» — честный совет повышает доверие.</p>
-      <p><strong>CTA.</strong> UTM на фильтр сайта. Это продуктовая серия для менеджеров тоже.</p>
-    </div>
-    <h3>Тема H. «Кто не спит, когда вы спите»</h3>
-    <div class="script">
-      <p><strong>Цель.</strong> Доверие + красота. Офицер или капитан, огни порта / ночная палуба.</p>
-      <p><strong>Хук.</strong> Шёпот, «сейчас 2:40».</p>
-      <p><strong>Сценарий 25 сек.</strong> Только разрешённые точки. Никаких приборов крупно. Если слот не дали — не снимаем «как шпионы», берём резерв №13.</p>
-    </div>
-  </section>
-
-  <!-- 13 -->
-  <section class="panel" id="p13">
-    <p class="kicker">Пункт 13</p>
-    <h2>Пример контент-плана одного круиза, съёмочного дня и сценария вертикального ролика</h2>
-    <h3>Сетка рейса 8 ночей</h3>
-    <div class="table-wrap">
-      <table>
-        <tr><th>День</th><th>Смысл</th><th>Обязательные оригиналы</th><th>Оперативка</th><th>Резерв, если сломался слот</th><th>Куда публикуем логику</th></tr>
-        <tr><td>0 посадка</td><td>Логистика</td><td>Тема A, первая минута каюты</td><td>Трап, очередь (без зла на службу)</td><td>Чемодан / трансфер без героя</td><td>Вечер: 1 оперативка</td></tr>
-        <tr><td>1 море/порт</td><td>Привыкание</td><td>Что входит (E), капитан B1</td><td>Бассейн, «где я»</td><td>Укачивание (гость)</td><td>2 оперативки + 1 серия</td></tr>
-        <tr><td>2 порт</td><td>Берег честно</td><td>4 часа пешком (9), когда группа (10)</td><td>Вид на лайнер с берега</td><td>Шоппинг-мем без брендов</td><td>В день порта</td></tr>
-        <tr><td>3 порт/море</td><td>Еда</td><td>Блюдо порта, Selection (14)</td><td>Завтрак-деталь</td><td>Команда кухни без шефа</td><td>Серия кухни вечером +1</td></tr>
-        <tr><td>4 порт</td><td>Люди</td><td>Дети (8), пара на закате</td><td>Палуба</td><td>Спа только снаружи, без процедур лиц</td><td>2 ролика</td></tr>
-        <tr><td>5 море</td><td>Продукт</td><td>Кладовка (D), стюард (17), визы (F)</td><td>Фитнес / пустая палуба</td><td>Собери чемодан (19)</td><td>Вечнозелёные в резерв и в ленту</td></tr>
-        <tr><td>6 порт</td><td>Эмоция</td><td>Эдуардо (C), коктейль капитана (12)</td><td>Шоу, белая вечеринка по афише</td><td>Музыкант палубы</td><td>Вечерняя оперативка</td></tr>
-        <tr><td>7 море/порт</td><td>Доверие</td><td>Капитан B2, постоянный гость (16)</td><td>Огни</td><td>Тема H, если аппрув</td><td>Экспертные</td></tr>
-        <tr><td>8 высадка</td><td>Мост к следующему</td><td>Семья/пара/первый раз (G)</td><td>Сборы, «что увезти»</td><td>Объятия по согласию</td><td>Финал + пакет менеджерам</td></tr>
-      </table>
-    </div>
-    <p class="muted">На 8 ночей это ~14–16 оригиналов + 18–24 оперативки. Остаток месячных 48 оригиналов добирается берегом: адаптации, реклама, библиотека с прошлых дублей, которые не были «нарезкой ради KPI», а другими хуками.</p>
-
-    <h3>Съёмочный день 1 — кухня + порт (день 3)</h3>
-    <div class="table-wrap">
-      <table>
-        <tr><th>Слот</th><th>Задача</th><th>Кто в кадре</th><th>Риск</th><th>План Б</th></tr>
-        <tr><td>07:30</td><td>Планёрка, бэкап</td><td>—</td><td>Нет связи</td><td>SSD, не облако</td></tr>
-        <tr><td>08:15</td><td>B-roll завтрака</td><td>Руки, еда, без лиц</td><td>Жалоба</td><td>Уходим</td></tr>
-        <tr><td>09:15–10:00</td><td>Блюдо порта</td><td>Шеф + 1 повар</td><td>Пик кухни</td><td>Перенос на 16:00, снимаем Selection с официантом</td></tr>
-        <tr><td>10:30–14:00</td><td>4 часа в городе</td><td>Продюсер в кадре или гость</td><td>Погранзона, дети</td><td>Только набережная и лайнер</td></tr>
-        <tr><td>16:00–17:00</td><td>Каюта / продукт</td><td>Стюард</td><td>Гости вернулись</td><td>Пустой коридор, деталь</td></tr>
-        <tr><td>18:30</td><td>Живая музыка</td><td>Атмосфера</td><td>Авторские права на хит</td><td>Без фонограммы, свой звук или библиотека</td></tr>
-        <tr><td>21:00–21:40</td><td>Шоу, 3 плана</td><td>Эдуардо / зал</td><td>Точки театра</td><td>Только разрешённые</td></tr>
-        <tr><td>22:30–00:30</td><td>Cut порта + кухни</td><td>—</td><td>Сеть</td><td>Прокси, мастер в порту</td></tr>
-      </table>
-    </div>
-
-    <h3>Съёмочный день 2 — море, продукт (день 5)</h3>
-    <div class="table-wrap">
-      <table>
-        <tr><th>Слот</th><th>Задача</th><th>Карточка</th></tr>
-        <tr><td>08:00–09:00</td><td>Внутренняя каюта, пара</td><td>Тема D, два хука (чёрный кадр / «кладовка» голосом)</td></tr>
-        <tr><td>09:30–10:00</td><td>Стюард</td><td>Тема 17, 20 сек</td></tr>
-        <tr><td>11:00–11:30</td><td>Визы, графика + голос продюсера на палубе</td><td>Тема F, без «юридических импровизаций»</td></tr>
-        <tr><td>12:30–13:00</td><td>Собери чемодан</td><td>Тема 19, реквизит из своей каюты, не чужой чемодан</td></tr>
-        <tr><td>16:00</td><td>Капитан или офицер, если слот</td><td>B2 / H</td></tr>
-        <tr><td>После ужина</td><td>Не снимаем шоу — день продукта, людям даём отдых от камеры</td><td>Этика важнее лишней единицы</td></tr>
-        <tr><td>Ночь</td><td>Три оперативки не делаем. Два чистых оригинала в мастер.</td><td>Качество серий</td></tr>
-      </table>
-    </div>
-
-    <h3>Сценарий 1. Вертикаль «Кладовка», 38 сек</h3>
-    <div class="script">
-      <p>0.0–0.8 чёрный экран, титр «Нам сказали — это кладовка», стук карты.</p>
-      <p>0.8–3.0 дверь, свет, голос: «Внутренняя каюта. Первый круиз».</p>
-      <p>3–8 зеркало, душ, кровать. Титр: «Да, без окна».</p>
-      <p>8–14 ТВ, носовая камера. «Зато утро мы встречаем отсюда».</p>
-      <p>14–22 стюард, две фразы про полотенца и температуру. Без чаевых.</p>
-      <p>22–30 коридор, палуба, море. Контраст.</p>
-      <p>30–35 титр про категории без унижения внутренних.</p>
-      <p>35–38 CTA «сравнить каюты — сайт в шапке». Не логотип на 5 секунд.</p>
-      <p>Звук: петлица. Музыка — библиотека с ads-правами. TikTok-адаптация: обрезать CTA, усилить хук. VK: крупнее шрифт.</p>
-    </div>
-    <h3>Сценарий 2. Вертикаль «90 секунд», 40 сек</h3>
-    <div class="script">
-      <p>0–2 таймер 01:30, дыхание, дверь гримёрки.</p>
-      <p>2–12 сборы, одна шутка Эдуардо в камеру, без пошлости.</p>
-      <p>12–22 коридор экипажа (если можно) или край кулис.</p>
-      <p>22–32 зал, аплодисменты, спины. Лица — только согласие, иначе размытие / спины.</p>
-      <p>32–38 титр «Каждый вечер. Входит в круиз».</p>
-      <p>38–40 CTA «афиша рейса на сайте» или без CTA для чистого охвата.</p>
-    </div>
-    <h3>Сценарий 3. Вертикаль «Виза», 20 сек</h3>
-    <div class="script">
-      <p>0–3 хук: «Визу на борту не ставят. Запомните три карточки».</p>
-      <p>3–8 Турция: паспорт, кадр Антальи.</p>
-      <p>8–13 Египет: отдельный въездной, кадр без «пирамид стока», лучше борт/море.</p>
-      <p>13–18 Шенген: заранее, страна по большинству дней маршрута — формулировка продукта.</p>
-      <p>18–20 «Проверьте ваш рейс. Ссылка в шапке».</p>
-    </div>
-  </section>
-
-  <!-- 14 -->
-  <section class="panel blank" id="p14">
-    <p class="kicker">Пункт 14</p>
-    <h2>Релевантные кейсы со ссылками на реальные аккаунты и примерами измеримых результатов</h2>
-    <p class="placeholder">Вставить</p>
-  </section>
-
-  <!-- 15 -->
-  <section class="panel" id="p15">
-    <p class="kicker">Пункт 15</p>
-    <h2>При наличии — подход к оценке ROI, релевантные кейсы с бизнес-результатом и сценарная модель потенциальной окупаемости пилота</h2>
-    <p>Прогноз не гарантия и не основание для штрафа. Без данных Аквилона любая цифра — театр. Мы заранее фиксируем, чего просим на старте: UTM, скрипт колл-центра «откуда узнали», средний чек, конверсия заявка→оплата, список приоритетных круизов пилота.</p>
-    <h3>Что входит в «вклад контента», кроме last click</h3>
-    <ul>
-      <li>Переходы UTM на страницы круизов и чартера.</li>
-      <li>Вопросы в комментариях и Директе: дата, каюта, виза, дети, Анталья — классификатор.</li>
-      <li>Обращения с пометкой Reels/TikTok/VK/TG, если колл-центр согласится.</li>
-      <li>Вторичка: ролики в работе менеджеров, агентов, рассылок — замещённый отдельный продакшн.</li>
-    </ul>
-    <h3>Допущения черновика (заменить на факты заказчика)</h3>
-    <p>Чек на гостя в смешанном пилоте: 180 000 ₽ (вилка сайта широкая: короткие турецкие vs 14 ночей). Маржинальный «вклад маркетинга» 20% от чека — <strong>условность для разговора</strong>, не бухгалтерия Аквилона. Стоимость рекомендуемого пилота: 5 650 000 ₽.</p>
-    <div class="table-wrap">
-      <table>
-        <tr><th>Сценарий</th><th>Допущение за 90 дней</th><th>Грубая экономика</th><th>Как читать</th></tr>
-        <tr><td>Консервативный</td><td>8 атрибутированных броней + архив 2027</td><td>8 × 180k × 20% = 288 000 ₽ прямого вклада</td><td>Пилот как R&amp;D. Окупаемость не в квартале</td></tr>
-        <tr><td>Базовый</td><td>25 броней с касанием контента + 12 роликов у агентов</td><td>900 000 ₽ + замещённый продакшн 0,8–1,2 млн</td><td>Частичная окупаемость, ход в сезон</td></tr>
-        <tr><td>Оптимистичный</td><td>1–2 ролика-события, 50+ броней с касанием</td><td>1,8 млн + медиаэффект органики</td><td>Канал спроса, всё ещё не печатный станок</td></tr>
-      </table>
-    </div>
-    <p>Даже оптимизм не «закрывает 5,65 млн одной таблицей». Честный тезис: пилот покупает систему, библиотеку и данные. Деньги сезона 2027 важнее 90 дней. Кто в тендере обещает payback 2× за квартал — пусть покажет методику атрибуции, не слайд.</p>
-  </section>
-
-  <!-- 16 -->
-  <section class="panel" id="p16">
-    <p class="kicker">Пункт 16</p>
-    <h2>Методика тестирования форматов, достижения органического охвата и оценки влияния на трафик, обращения, заявки и бронирования</h2>
-    <h3>Цикл одной гипотезы</h3>
-    <ol>
-      <li>Фраза: «внутренняя каюта даст сохранения и вопросы про категории».</li>
-      <li>Карточка: герой, хук, CTA, площадка, запреты.</li>
-      <li>Два хука на сильный сюжет, не один дубль.</li>
-      <li>Публикация в согласованном окне, не «всё в пятницу в 23:00».</li>
-      <li>24 часа: удержание 3 сек, досмотр, сохранения.</li>
-      <li>72 часа: комментарии-вопросы про продукт.</li>
-      <li>Решение: усилить / переснять хук / убить / в рекламу / менеджерам.</li>
-    </ol>
-    <h3>Матрица пилота — что именно тестируем</h3>
-    <div class="table-wrap">
-      <table>
-        <tr><th>Ось</th><th>Варианты</th><th>Как не испортить тест</th></tr>
-        <tr><td>Герой</td><td>Капитан / Эдуардо / шеф / гость / стюард</td><td>Сопоставимое качество картинки и слота</td></tr>
-        <tr><td>Хук</td><td>Вопрос / POV / ожидание-реальность / таймер / честный список</td><td>Один смысл на ролик</td></tr>
-        <tr><td>CTA</td><td>Сайт / «напишите маршрут» / без CTA</td><td>Не мешать охват и продажу в одном тесте без пометки</td></tr>
-        <tr><td>Длина</td><td>18–25 vs 30–45</td><td>Тот же сюжет</td></tr>
-        <tr><td>Площадка</td><td>Разные первые кадры, не один файл на все сети</td><td>Адаптация = другая единица, если другой хук</td></tr>
-      </table>
-    </div>
-    <p>Органику не покупаем. Если не идёт — меняем хук и тему, не плодим нарезку. Платное усиление победителей — решение SMM; мы готовим rights-safe. Спрос не равен «бронирования сезона вообще»: смотрим недели продуктовых серий vs недели атмосферного клея.</p>
-  </section>
-
-  <!-- 17 -->
-  <section class="panel" id="p17">
-    <p class="kicker">Пункт 17</p>
-    <h2>Формы еженедельного статуса и ежемесячного аналитического отчёта</h2>
-    <h3>Еженедельный статус (1–2 страницы)</h3>
-    <div class="table-wrap">
-      <table>
-        <tr><th>Блок</th><th>Поля</th></tr>
-        <tr><td>Производство</td><td>Снято / в монтаже / на согласовании / опубликовано SMM / в резерве. План vs факт единиц.</td></tr>
-        <tr><td>Оперативность</td><td>Доля день / +1. Срывы: причина (сеть, слот, погода, аппрув).</td></tr>
-        <tr><td>Топ-5 / антитоп-3</td><td>Просмотры, удержание 3 сек, сохранения, репосты, вопросы про продукт.</td></tr>
-        <tr><td>Герои</td><td>Кто снялся, кто сорвался, что решили на следующую неделю.</td></tr>
-        <tr><td>Рубрики</td><td>Усилить / подождать / убить.</td></tr>
-        <tr><td>Риски</td><td>Жалобы, ошибки факта, takedown. Если ноль — пишем ноль, не «всё ок».</td></tr>
-        <tr><td>Решения</td><td>Что в рекламу, что менеджерам, что переснять.</td></tr>
-        <tr><td>Запросы к заказчику</td><td>Слоты, формулировки виз/цен, доступы.</td></tr>
-      </table>
-    </div>
-    <h3>Ежемесячный отчёт</h3>
-    <ul>
-      <li>Объём 200/300 и структура единиц (чтобы было видно: не нарезка).</li>
-      <li>Площадки: охваты, ER, прирост. Пометка «публиковал SMM».</li>
-      <li>Воронка: вопросы, UTM, обращения — если данные дали.</li>
-      <li>Матрица героев и рубрик.</li>
-      <li>Юрлог согласий и инцидентов.</li>
-      <li>Что ушло в рекламу / сайт / агентов.</li>
-      <li>Развилки бюджета: 3-й человек, порт-день, аккаунт.</li>
-    </ul>
-    <p>День 90: защита. Победители, неудачи, интерес к маршрутам, модель и бюджет на 6 месяцев.</p>
-  </section>
-
-  <!-- 18 -->
-  <section class="panel" id="p18">
-    <p class="kicker">Пункт 18</p>
-    <h2>Порядок юридической проверки, оформления прав, согласований и действий в кризисной ситуации</h2>
-    <h3>До камеры</h3>
-    <ul>
-      <li>Согласия: гость, сотрудник, артист, блогер. Дети — отдельная форма законного представителя.</li>
-      <li>Стоп-локации: мостик без слота, служебка, чужие каюты, документы, экраны PMS, багажные бирки, лица детей без бумаги.</li>
-      <li>Стоп-темы: политика, слухи про безопасность акватории — только текст PR заказчика.</li>
-      <li>Фактчек: визы, офер, цены, расписание — карточка Аквилона, не память продюсера.</li>
-    </ul>
-    <h3>Кто подписывает что</h3>
-    <div class="table-wrap">
-      <table>
-        <tr><th>Тип материала</th><th>SMM (тон)</th><th>Продукт (факты)</th><th>Оперслужба</th><th>PR</th></tr>
-        <tr><td>Оперативка атмосфера</td><td>Да, 4 ч</td><td>Нет, если нет цифр</td><td>Нет</td><td>Нет</td></tr>
-        <tr><td>Цены, визы, «что входит»</td><td>Да</td><td>Обязательно</td><td>Нет</td><td>По запросу</td></tr>
-        <tr><td>Мостик, безопасность</td><td>Да</td><td>Да</td><td>Обязательно до съёмки и до эфира</td><td>Да</td></tr>
-        <tr><td>Кризис / жалоба</td><td>Снять сразу</td><td>—</td><td>По факту</td><td>Голос только их</td></tr>
-      </table>
-    </div>
-    <h3>Кризис — часы, не «разберёмся»</h3>
-    <ol>
-      <li>Сигнал: жалоба, ошибка, указание капитана/PR.</li>
-      <li>15 минут: ролик снят или не выложен. Статус заказчику.</li>
-      <li>2 часа: правка или письменное «не возвращать».</li>
-      <li>24 часа: разбор, чтобы сюжет не повторился.</li>
-      <li>Команда не комментирует прессе.</li>
-    </ol>
-    <p>Музыка: коммерческая библиотека. Тренд-звук — только органика, в рекламу не идёт. Портфолио подрядчика — только письменное согласие.</p>
-  </section>
-
-  <!-- 19 -->
-  <section class="panel" id="p19">
-    <p class="kicker">Пункт 19</p>
-    <h2>Полный перечень передаваемых материалов и прав</h2>
-    <p>После оплаты этапа — исключительные права без ограничений по территории, сроку и способам на оплаченное. Использование: соцсети, реклама, сайт, рассылки, печать, менеджеры, партнёры, агентская сеть.</p>
-    <div class="table-wrap">
-      <table>
-        <tr><th>Пакет</th><th>Состав</th><th>Маркировка</th></tr>
-        <tr><td>Исходники</td><td>Видео, отдельный звук, фото с площадки</td><td>Рейс, дата, карта памяти / SSD id</td></tr>
-        <tr><td>Финалы</td><td>9:16 мастер, с субтитрами и без, обложки</td><td>Герой, тема, статус прав</td></tr>
-        <tr><td>Тексты</td><td>Промпт поста, CTA, UTM</td><td>Площадка</td></tr>
-        <tr><td>Сценарии</td><td>Карточки, рубрикатор, библия в части проекта</td><td>Версия</td></tr>
-        <tr><td>Графика</td><td>Титры, шаблоны; шрифты — если лицензия позволяет, иначе замена</td><td></td></tr>
-        <tr><td>Рекламные версии</td><td>Rights-safe</td><td>Пометка ads</td></tr>
-        <tr><td>Проекты монтажа</td><td>При технической и лицензионной возможности, как в ТЗ</td><td></td></tr>
-        <tr><td>Согласия</td><td>Реестр + файлы заказчику</td><td>Не храним «у себя как актив»</td></tr>
-        <tr><td>Аккаунты проекта</td><td>Логины, аудитория</td><td>Astoria Grande</td></tr>
-      </table>
-    </div>
-    <p>Водяных знаков сторонних приложений нет. Подрядчик не удерживает бренд на файлах.</p>
-  </section>
-
-  <!-- 20 -->
-  <section class="panel" id="p20">
-    <p class="kicker">Пункт 20</p>
-    <h2>Условия правок, сроки, SLA и порядок согласований</h2>
-    <div class="table-wrap">
-      <table>
-        <tr><th>Тип</th><th>Срок сдачи</th><th>Окно аппрува</th><th>В ставке</th><th>Срочность</th></tr>
-        <tr><td>Оперативка из плана</td><td>День съёмки или +1</td><td>4 рабочих часа с пакета. Молчание — эскалация, не автопост</td><td>1 смысл + 1 техника</td><td>Вне плана — п. 9</td></tr>
-        <tr><td>Серия / герой</td><td>72 часа после съёмки</td><td>2 рабочих дня</td><td>2 круга</td><td>Сжатие +40%</td></tr>
-        <tr><td>Продукт / вечнозелёное</td><td>5 рабочих дней</td><td>3 дня на фактчек</td><td>2 круга</td><td>—</td></tr>
-        <tr><td>Рекламная версия</td><td>3 дня после выбора</td><td>2 дня + проверка прав</td><td>2 круга</td><td>24 часа — отдельная ставка</td></tr>
-        <tr><td>Горизонталь</td><td>По п. 9</td><td>3 дня</td><td>2 круга</td><td>—</td></tr>
-      </table>
-    </div>
-    <ul>
-      <li>Круг правок — таймкоды, не «сделайте веселее».</li>
-      <li>Третий круг или смена концепции = 40% единицы или монтажный день 75 000 ₽.</li>
-      <li>Назначенные лица: SMM, продукт, оперслужба, PR. Без имён SLA не стартует.</li>
-      <li>Интернет на борту не равен 4K. Оперативка может уйти прокси, мастер — в порту. Это регламент, не срыв, если прокси согласован.</li>
-      <li>Форс-мажор: погода, запрет капитана, болезнь героя, отмена порта — замена из резерва, без штрафа оригинала, если единицы закрыты по согласованной замене.</li>
-    </ul>
-  </section>
-
-  <section class="panel">
-    <p class="kicker">Как просим себя судить</p>
-    <h2>Не по случайному миллиону просмотров</h2>
-    <p>По ритму, честному объёму без нарезки, бережности к гостю, серийности героев, оперативке, аналитике с решениями, юридической чистоте и тому, годятся ли ролики менеджеру в переписке с сомневающимся.</p>
-    <p>На выходе пилота — бортовая редакция: жизнь лайнера видна каждый день, старт из Антальи объяснён человеческим языком, у SMM и агентов есть библиотека, у заказчика есть данные, чтобы решить, нужен ли этот контур на следующие 18 круизов.</p>
-    <p class="muted">v0.3 · заголовки — по разделу 11 ТЗ · пункт 14 оставлен под вставку кейсов · цены пункта 9 −20% к v0.2</p>
-  </section>
+<section class="panel"><p class="kicker">Дисклеймер</p><p class="muted">Дисклеймер</p></section><section class="panel" id="p1"><p class="kicker">Пункт 1</p><h2>Концепция Content Factory и видение пилота на 3 месяца</h2><p>Astoria Grande Content Factory — это оперативный новостной штаб на борту. На лайнере каждый день происходят события: посадка, порты, шоу, анимация, и пр. А также, случаются непредвиденные ситуации. Штаб работает как служба новостей: информирует людей обо всем самом интеерсном, то что действительно заслуживает внимание без купюр. Показываем, что во время круиза всегда что-то происходит.  </p><p>Визуальная подача в манере сериала «Офис»: проф съемка но присутствует лёгкая неловкость живого момента. Всё, что вы видите -  настоящее. Это не постановка, это ощущение, что на корабле есть своя редакция, и она показывает всё важное. </p><p>Как выглядят выпуски</p><p>Мы имеем вариативность форматов: плановые выпуски раз в день/1-3 в неделю общего плана хронометражом до 1минуты. Также спецвыпуски посвященные определенной теме до 1 минуты. Экстренные выпуски посвященные срочным/важным новостям, акциям - хронометраж ситуативный. Референс - <a href="https://disk.yandex.ru/i/ilwRP6lqSCYtww" target="_blank" rel="noopener">https://disk.yandex.ru/i/ilwRP6lqSCYtww</a> </p>
+<p>Тон: серьёзно, с лёгким юмором</p>
+<ul class="tone-list">
+<li><strong>Факты</strong> - о визах, цене, безопасности, условиях — без шуток, четко, ясно.</li>
+<li><strong>Быт лайнера</strong> — можно улыбнуться: взгляд в камеру, пауза, нарочитый простой формат, интервью.</li>
+<li><strong>Ведущая</strong> (она же видеограф 2) не аниматор, а источник правды на корабле.</li>
+<li><strong>Герои экипажа</strong> - наши корреспонденты с конкретного места события.</li>
+</ul>
+</section><section class="panel" id="p2"><p class="kicker">Пункт 2</p><h2>Собственное видение модели работы, если подрядчик предлагает альтернативу базовому формату ТЗ, с обоснованием эффективности</h2><p>Мы предлагаем отклонение от базовой модели работы - два человека на круизе: оператор вертикали и сценарист-продюсер. Для нашей концепции да и для любой другой концепции, этого мало для команды, которая не ориентируется на корабле. Не знакомый персонал, распорядок, маршруты и прочее, могут подвести в неподходящий момент. Наличие двух человек с камерами - нивелирует все риски, плюс дает более длинный съемочный день и вариативность ракурсов. Второй оператор - она же корреспондент в нашем варианте концепции. Также, видим штатного монтажера в команде на корабле, что позволит не зависеть от подключения к интернету и все важны, срочные проекты сдавать максимально оперативно. При высокой загруженности, материал отправляется удаленному монтажеру.Коориднатор/продюссер/шоураннер, будет присутствовать только на первом (максимум на втором)  рейсе. Она будет управлять всей командой, отлаживать процессы и формировать флоу работы, который будет зафиксирован на следующие круизы. </p><p>Состав пилота</p><div class="table-wrap"><table class="index-table"><tr><th>№</th><th>Роль</th><th>Присутствие</th><th>Роль</th></tr><tr class=""><td>1</td><td>Оператор основной, с навыком дрона. (Никита)</td><td>На корбале</td><td>Основная камера + дрон. Знание художественной части и технической.</td></tr><tr class=""><td>2</td><td>Оператор второй, с сильным фото (Даша)</td><td>На корбале</td><td>Вторая камера + фотоконтент, а также ведущая - репортер в контенте.</td></tr><tr class=""><td>3</td><td>Монтажер штатный</td><td>На корбале</td><td>Монтаж всех срочных, важных роликов.</td></tr><tr class=""><td>4</td><td>Координатор/Продюссер (Евгения)</td><td>На корбале</td><td>Коориднация, связь, контроль и утверждение рабочего флоу.</td></tr><tr class=""><td>5</td><td>Монтажер (от 1 до 5) по запросу и необходимости.</td><td>Удаленно</td><td>Монтаж</td></tr><tr class=""><td>6</td><td>Аналитик (Антон)</td><td>Удаленно, парт-тайм</td><td>Аналитика, сводки, отчеты</td></tr><tr class=""><td>7</td><td>Аккаунт/Логер</td><td>Удаленно</td><td>Получение задач, информации от клиента, логирование файлов, сортировка, передача клинту.</td></tr><tr class=""><td>8</td><td>Сценарист (Семен)</td><td>Удаленно</td><td>Написание сценариев, даилогов</td></tr></table></div></section><section class="panel" id="p3"><p class="kicker">Пункт 3</p><h2>Состав команды, роли, опыт ключевых специалистов и резервный состав</h2><div class="table-wrap"><table class="index-table"><tr><th>п/п</th><th>Роль</th><th>Портфолио</th></tr><tr class=""><td>1</td><td>Оператор основной, с навыком дрона. (Никита)</td><td><a href="https://www.behance.net/npanov" target="_blank" rel="noopener">https://www.behance.net/npanov</a></td></tr><tr class=""><td>2</td><td>Оператор второй, с сильным фото (Даша)</td><td><a href="https://www.instagram.com/lvovadash?igsh=MWtiNG0zYTl3NmozMg==" target="_blank" rel="noopener">https://www.instagram.com/lvovadash?igsh=MWtiNG0zYTl3NmozMg==</a></td></tr><tr class=""><td>3</td><td>Монтажер штатный (Ваня)</td><td><a href="https://disk.yandex.ru/d/T_URr_IW_U-r6w" target="_blank" rel="noopener">https://disk.yandex.ru/d/T_URr_IW_U-r6w</a></td></tr><tr class=""><td>4</td><td>Координатор/Продюссер (Евгения)</td><td><a href="https://docs.google.com/presentation/d/1qwhZ1zZjfYBfEGpxjmggW1q6v4Uqx4XRLcotv3RMzO0/edit?slide=id.p#slide=id.p" target="_blank" rel="noopener">Портфолио. Бабаева Е.М.</a></td></tr><tr class=""><td>5</td><td>Монтажер (Леха)</td><td><a href="https://disk.yandex.ru/d/WHCpa3hwmGtZ6Q" target="_blank" rel="noopener">https://disk.yandex.ru/d/WHCpa3hwmGtZ6Q</a></td></tr><tr class=""><td>6</td><td>Аналитик</td><td>&nbsp;</td></tr><tr class=""><td>7</td><td>Сценарист (Семен)</td><td><a href="https://mistaboombastik.framer.website/" target="_blank" rel="noopener">https://mistaboombastik.framer.website/</a></td></tr><tr class=""><td>8</td><td>Аккаунт/Логгер</td><td><a href="https://uskov.space/" target="_blank" rel="noopener">https://uskov.space/</a></td></tr></table></div><p>Резерв</p><div class="table-wrap"><table class="index-table"><tr><th>п/п</th><th>Роль</th><th>Портфолио</th></tr><tr class=""><td>1</td><td>Резервный продюсер Паша/Света</td><td><a href="https://www.instagram.com/svetamrng?igsi=MWl1bWdybWc0anltMg==" target="_blank" rel="noopener">https://www.instagram.com/svetamrng?igsi=MWl1bWdybWc0anltMg==</a></td></tr><tr class=""><td>2</td><td>Оператор основной, с навыком дрона. (Федя)</td><td><a href="https://disk.yandex.ru/d/KuVJLAQlLSWbXw" target="_blank" rel="noopener">https://disk.yandex.ru/d/KuVJLAQlLSWbXw</a></td></tr><tr class=""><td>2</td><td>Оператор второй, с сильным фото (Диана)</td><td><a href="https://disk.yandex.ru/d/01myqA1JBrQI9g" target="_blank" rel="noopener">https://disk.yandex.ru/d/01myqA1JBrQI9g</a></td></tr><tr class=""><td>3</td><td>Резерный монтажер</td><td><a href="https://disk.yandex.ru/d/Dj4i9eUbTT-dMg" target="_blank" rel="noopener">https://disk.yandex.ru/d/Dj4i9eUbTT-dMg</a></td></tr><tr class=""><td>4</td><td>Резеврный монтажер 2</td><td>Conference - <a href="https://disk.yandex.ru/d/hkaaxzN71lSt1A" target="_blank" rel="noopener">https://disk.yandex.ru/d/hkaaxzN71lSt1A</a><br>Events - <a href="https://disk.yandex.ru/d/5cGHWmjN0i-UGw" target="_blank" rel="noopener">https://disk.yandex.ru/d/5cGHWmjN0i-UGw</a><br>Party - <a href="https://disk.yandex.ru/d/dYM_sOEtzXRpDg" target="_blank" rel="noopener">https://disk.yandex.ru/d/dYM_sOEtzXRpDg</a></td></tr><tr class=""><td>5</td><td>Резервный сценарист (Динар)</td><td>портфель AI – <a href="https://drive.google.com/drive/folders/1EbpW4mZnZ262BSCPtzK7g_iOEx0acobb?usp=share_link" target="_blank" rel="noopener">https://drive.google.com/drive/folders/1EbpW4mZnZ262BSCPtzK7g_iOEx0acobb?usp=share_link</a><br>портфель продакшен – <a href="https://drive.google.com/drive/folders/1EbpW4mZnZ262BSCPtzK7g_iOEx0acobb?usp=share_link" target="_blank" rel="noopener">https://drive.google.com/drive/folders/1EbpW4mZnZ262BSCPtzK7g_iOEx0acobb?usp=share_link</a></td></tr></table></div></section><section class="panel" id="p4"><p class="kicker">Пункт 4</p><h2>Формат работы команды на борту и между рейсами, включая готовность к участию в последующих круизах при успешном пилоте</h2><p>Основные теоретические, сценарные, визуальные решения будут подготавливаться на берегу, но начала круиза. Согласовываться с клиентом и другими участниками съемок. Продюсер заготавливает шаблоны документов, списки участников съемок, локации и прочее. Сценарист готовит сценарии и диалоги. Монтажер и оператор готовят базу ассетов, лутов, музыки и пр. </p><p>Основной акцент стоит уделить распорядку дня на самом корабле, тк время ограничено и нужно снять как можно больше самого круиза. Два оператора позволят забирать съемочный день примерно с 07:00 до 00:00 часов, при сменной работе. В отсутствие съемок и активностей будет ресурс 2х монтажеров, что также позволит сдавать материал быстрее и качественнее. они знают свой материал и не тратят время на загрузку и скачку.</p><p>Готовность к следующим круизам - да. Команда предупреждена и готова к следующим круизам и долгосрочной работе. Допускаем, что в процессе будут изменения состава, но гарантируем изменения 1-2 человек, чтобы основной состав остался и новому человеку было проще понять флоу. </p>
+<div class="org-chart" aria-label="Схема работы команды">
+  <svg viewBox="0 0 720 520" width="720" height="520" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+        <path d="M0,0 L8,4 L0,8 Z" fill="#2b68c9"/>
+      </marker>
+    </defs>
+    <!-- feedback loop -->
+    <path class="line-accent" d="M 620 430 L 620 480 L 40 480 L 40 50" marker-end="url(#arrow)"/>
+    <!-- vertical spine -->
+    <line class="line" x1="360" y1="52" x2="360" y2="88" marker-end="url(#arrow)"/>
+    <line class="line" x1="360" y1="128" x2="360" y2="164" marker-end="url(#arrow)"/>
+    <line class="line" x1="360" y1="204" x2="360" y2="228"/>
+    <line class="line" x1="140" y1="228" x2="580" y2="228"/>
+    <line class="line" x1="140" y1="228" x2="140" y2="252" marker-end="url(#arrow)"/>
+    <line class="line" x1="360" y1="228" x2="360" y2="252" marker-end="url(#arrow)"/>
+    <line class="line" x1="580" y1="228" x2="580" y2="252" marker-end="url(#arrow)"/>
+    <line class="line" x1="140" y1="322" x2="140" y2="346"/>
+    <line class="line" x1="360" y1="322" x2="360" y2="346"/>
+    <line class="line" x1="580" y1="322" x2="580" y2="346"/>
+    <line class="line" x1="140" y1="346" x2="580" y2="346"/>
+    <line class="line" x1="140" y1="346" x2="140" y2="370" marker-end="url(#arrow)"/>
+    <line class="line" x1="360" y1="346" x2="360" y2="370" marker-end="url(#arrow)"/>
+    <line class="line" x1="580" y1="346" x2="580" y2="370" marker-end="url(#arrow)"/>
+    <!-- nodes -->
+    <rect class="node-primary" x="230" y="12" width="260" height="40" rx="10"/>
+    <text class="node-text" x="360" y="37" text-anchor="middle">КОМАНДА КЛИЕНТА</text>
+    <rect class="node-secondary" x="255" y="88" width="210" height="40" rx="10"/>
+    <text class="node-text-dark" x="360" y="105" text-anchor="middle">АККАУНТ / ЛОГГЕР</text>
+    <text class="node-sub" x="360" y="118" text-anchor="middle">Усков Евгений</text>
+    <rect class="node-secondary" x="215" y="164" width="290" height="40" rx="10"/>
+    <text class="node-text-dark" x="360" y="181" text-anchor="middle">ПРОДЮСЕР / КООРДИНАТОР</text>
+    <text class="node-sub" x="360" y="194" text-anchor="middle">Евгения</text>
+    <rect class="node-secondary" x="40" y="252" width="200" height="70" rx="10"/>
+    <text class="node-text-dark" x="140" y="278" text-anchor="middle">НИКИТА</text>
+    <text class="node-sub" x="140" y="293" text-anchor="middle">Оператор + дрон</text>
+    <rect class="node-secondary" x="260" y="252" width="200" height="70" rx="10"/>
+    <text class="node-text-dark" x="360" y="278" text-anchor="middle">ДАША</text>
+    <text class="node-sub" x="360" y="293" text-anchor="middle">Оператор + фото / ведущая</text>
+    <rect class="node-secondary" x="480" y="252" width="200" height="70" rx="10"/>
+    <text class="node-text-dark" x="580" y="278" text-anchor="middle">СЕМЁН</text>
+    <text class="node-sub" x="580" y="293" text-anchor="middle">Сценарист</text>
+    <rect class="node-secondary" x="40" y="370" width="200" height="60" rx="10"/>
+    <text class="node-text-dark" x="140" y="396" text-anchor="middle">МОНТАЖЁР</text>
+    <text class="node-sub" x="140" y="411" text-anchor="middle">Штатный · Ваня</text>
+    <rect class="node-secondary" x="260" y="370" width="200" height="60" rx="10"/>
+    <text class="node-text-dark" x="360" y="396" text-anchor="middle">ЛЁХА</text>
+    <text class="node-sub" x="360" y="411" text-anchor="middle">Монтажёр удалённо</text>
+    <rect class="node-secondary" x="480" y="370" width="200" height="60" rx="10"/>
+    <text class="node-text-dark" x="580" y="396" text-anchor="middle">АНАЛИТИК</text>
+    <text class="node-sub" x="580" y="411" text-anchor="middle">Антон · парт-тайм</text>
+    <text class="node-sub" x="52" y="468" text-anchor="start">↺ обратная связь и отчёты</text>
+  </svg>
 </div>
+</section><section class="panel" id="p6"><p class="kicker">Пункт 6</p><h2>Стоимость модели до 200 единиц контента в месяц и до 300 единиц контента в месяц с разбивкой по типам материалов</h2><h3>Пакет: 600 единиц контента</h3><p class="package-note">Astoria Grande · Пилот · 3 месяца · Турция, Мальта, Греция, Италия</p><div class="table-wrap"><table class="budget-table"><colgroup>
+  <col class="col-idx">
+  <col class="col-task">
+  <col class="col-name">
+  <col class="col-q1">
+  <col class="col-q2">
+  <col class="col-q3">
+  <col class="col-price">
+  <col class="col-total">
+</colgroup><tr class=""><td>&nbsp;</td><td>Astoria Grande | Пилот</td><td>3 месяца, 600 ед контента за пилот</td><td class="num">Astoria Grande</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td></tr><tr><th>№</th><th>Подрядчик<br>задача</th><th>Имя подрядчика<br>рентала</th><th class="num">Кол-во спец-ов</th><th class="num">Кол-во часов</th><th class="num">Количество смен</th><th class="num">Стоимость ед.</th><th class="num">Итого</th></tr><tr class="section-row"><td colspan="8">1.1 · Команда на корабле</td></tr><tr class=""><td>&nbsp;</td><td>Продюсер - координатор</td><td>Бабаева Евгения<br>Федотова Светлана<br>Курандин Павел</td><td class="num">1</td><td class="num">месяц</td><td class="num">3</td><td class="num">250 000,00 ₽</td><td class="num">750 000,00 ₽</td></tr><tr class=""><td>&nbsp;</td><td>Оператор-монтажёр основной с навыком дрона</td><td>Панов Никита<br>Ильясов Фёдор</td><td class="num">1</td><td class="num">месяц</td><td class="num">3</td><td class="num">300 000,00 ₽</td><td class="num">900 000,00 ₽</td></tr><tr class=""><td>&nbsp;</td><td>Оператор-монтажёр - ведущая (+ фото для обложек видео)</td><td>Дарья<br>Диана</td><td class="num">1</td><td class="num">месяц</td><td class="num">3</td><td class="num">200 000,00 ₽</td><td class="num">600 000,00 ₽</td></tr><tr class=""><td>&nbsp;</td><td>Монтажёр</td><td>Ваня<br>Лёша</td><td class="num">1</td><td class="num">месяц</td><td class="num">3</td><td class="num">100 000,00 ₽</td><td class="num">300 000,00 ₽</td></tr><tr class="section-row"><td colspan="8">1.2 · Команда удалённо</td></tr><tr class=""><td>&nbsp;</td><td>Аналитик</td><td>Антон</td><td class="num">1</td><td class="num">месяц</td><td class="num">3</td><td class="num">100 000,00 ₽</td><td class="num">300 000,00 ₽</td></tr><tr class=""><td>&nbsp;</td><td>Юрист</td><td>&nbsp;</td><td class="num">1</td><td class="num">месяц</td><td class="num">3</td><td class="num">20 000,00 ₽</td><td class="num">60 000,00 ₽</td></tr><tr class=""><td>&nbsp;</td><td>Аккаунт<br>логер</td><td>Усков Евгений</td><td class="num">1</td><td class="num">месяц</td><td class="num">3</td><td class="num">70 000,00 ₽</td><td class="num">210 000,00 ₽</td></tr><tr class=""><td>&nbsp;</td><td>Сценарист</td><td>Семён<br>Динар</td><td class="num">1</td><td class="num">месяц</td><td class="num">3</td><td class="num">100 000,00 ₽</td><td class="num">300 000,00 ₽</td></tr><tr class=""><td>&nbsp;</td><td>Монтаж</td><td>группа монтажёров от Никиты и Дарьи</td><td class="num">5</td><td class="num">проект</td><td class="num">проект</td><td class="num">300 000,00 ₽</td><td class="num">300 000,00 ₽</td></tr><tr class="subtotal"><td colspan="7" class="total-label">ПРОМЕЖУТОЧНЫЙ ИТОГ:</td><td class="num">3 720 000,00 ₽</td></tr><tr class=""><td>2</td><td>Оборудование</td><td>&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td></tr><tr class=""><td>&nbsp;</td><td>Оборудование</td><td>&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">100 000,00 ₽</td><td class="num">100 000,00 ₽</td></tr><tr class=""><td>&nbsp;</td><td>Роутер и есимки команде</td><td>&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">30 000,00 ₽</td><td class="num">30 000,00 ₽</td></tr><tr class=""><td>&nbsp;</td><td>Хард диски по 2-4 ТБ</td><td>&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">70 000,00 ₽</td><td class="num">70 000,00 ₽</td></tr><tr class=""><td>&nbsp;</td><td>Права на музыку</td><td>&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">20 000,00 ₽</td><td class="num">20 000,00 ₽</td></tr><tr class="subtotal"><td colspan="7" class="total-label">ПРОМЕЖУТОЧНЫЙ ИТОГ:</td><td class="num">220 000,00 ₽</td></tr><tr class=""><td>3</td><td>Операционные<br>логистические расходы</td><td>&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td></tr><tr class=""><td>&nbsp;</td><td>Визы команде</td><td>&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">4</td><td class="num">50 000,00 ₽</td><td class="num">200 000,00 ₽</td></tr><tr class=""><td>&nbsp;</td><td>Страховки команде</td><td>&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">4</td><td class="num">10 000,00 ₽</td><td class="num">40 000,00 ₽</td></tr><tr class=""><td>&nbsp;</td><td>Разрешения на съёмку (дрон + разрешения в историческом центре)</td><td>&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">150 000,00 ₽</td><td class="num">150 000,00 ₽</td></tr><tr class=""><td>&nbsp;</td><td>Логистика</td><td>&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">150 000,00 ₽</td><td class="num">150 000,00 ₽</td></tr><tr class=""><td>&nbsp;</td><td>Медикаменты (таблетки от морской болезни)</td><td>&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">40 000,00 ₽</td><td class="num">40 000,00 ₽</td></tr><tr class=""><td>&nbsp;</td><td>Комиссия тендерной площадки</td><td>&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">24 000,00 ₽</td><td class="num">24 000,00 ₽</td></tr><tr class=""><td>&nbsp;</td><td>Непредвиденные расходы 10% от сметы</td><td>&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">454 400,00 ₽</td><td class="num">454 400,00 ₽</td></tr><tr class="subtotal"><td colspan="7" class="total-label">ПРОМЕЖУТОЧНЫЙ ИТОГ:</td><td class="num">1 058 400,00 ₽</td></tr><tr class=""><td>&nbsp;</td><td>Маркап 15%</td><td>&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">749 760,00 ₽</td><td class="num">749 760,00 ₽</td></tr><tr class="grand-total"><td colspan="7" class="total-label">Итого без налога, РУБ:</td><td class="num">5 748 160,00 ₽</td></tr><tr class=""><td>&nbsp;</td><td>Налог, без НДС</td><td>&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">203 724,00 ₽</td><td class="num">203 724,00 ₽</td></tr><tr class="grand-total"><td colspan="7" class="total-label">Итого с налогом 15%, РУБ:</td><td class="num">5 951 884,00 ₽</td></tr></table></div><h3>Пакет: 900 единиц контента</h3><p class="package-note">Astoria Grande · Пилот · 3 месяца · Турция, Мальта, Греция, Италия</p><div class="table-wrap"><table class="budget-table"><colgroup>
+  <col class="col-idx">
+  <col class="col-task">
+  <col class="col-name">
+  <col class="col-q1">
+  <col class="col-q2">
+  <col class="col-q3">
+  <col class="col-price">
+  <col class="col-total">
+</colgroup><tr class=""><td>&nbsp;</td><td>Astoria Grande | Пилот</td><td>3 месяца, 900 ед контента за пилот</td><td class="num">Astoria Grande</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td></tr><tr><th>№</th><th>Подрядчик<br>задача</th><th>Имя подрядчика<br>рентала</th><th class="num">Кол-во спец-ов</th><th class="num">Кол-во часов</th><th class="num">Количество смен</th><th class="num">Стоимость ед.</th><th class="num">Итого</th></tr><tr class="section-row"><td colspan="8">1.1 · Команда на корабле</td></tr><tr class=""><td>&nbsp;</td><td>Продюсер - координатор</td><td>Бабаева Евгения<br>Федотова Светлана<br>Курандин Павел</td><td class="num">1</td><td class="num">месяц</td><td class="num">3</td><td class="num">250 000,00 ₽</td><td class="num">750 000,00 ₽</td></tr><tr class=""><td>&nbsp;</td><td>Оператор-монтажёр основной с навыком дрона</td><td>Панов Никита<br>Ильясов Фёдор</td><td class="num">1</td><td class="num">месяц</td><td class="num">3</td><td class="num">300 000,00 ₽</td><td class="num">900 000,00 ₽</td></tr><tr class=""><td>&nbsp;</td><td>Оператор-монтажёр - ведущая (+ фото для обложек видео)</td><td>Дарья<br>Диана</td><td class="num">1</td><td class="num">месяц</td><td class="num">3</td><td class="num">300 000,00 ₽</td><td class="num">900 000,00 ₽</td></tr><tr class=""><td>&nbsp;</td><td>Монтажёр</td><td>Ваня<br>Лёша</td><td class="num">1</td><td class="num">месяц</td><td class="num">3</td><td class="num">150 000,00 ₽</td><td class="num">450 000,00 ₽</td></tr><tr class="section-row"><td colspan="8">1.2 · Команда удалённо</td></tr><tr class=""><td>&nbsp;</td><td>Аналитик</td><td>Антон</td><td class="num">1</td><td class="num">месяц</td><td class="num">3</td><td class="num">100 000,00 ₽</td><td class="num">300 000,00 ₽</td></tr><tr class=""><td>&nbsp;</td><td>Юрист</td><td>&nbsp;</td><td class="num">1</td><td class="num">месяц</td><td class="num">3</td><td class="num">20 000,00 ₽</td><td class="num">60 000,00 ₽</td></tr><tr class=""><td>&nbsp;</td><td>Аккаунт<br>логер</td><td>Усков Евгений</td><td class="num">1</td><td class="num">месяц</td><td class="num">3</td><td class="num">70 000,00 ₽</td><td class="num">210 000,00 ₽</td></tr><tr class=""><td>&nbsp;</td><td>Сценарист</td><td>Семён<br>Динар</td><td class="num">1</td><td class="num">месяц</td><td class="num">3</td><td class="num">150 000,00 ₽</td><td class="num">450 000,00 ₽</td></tr><tr class=""><td>&nbsp;</td><td>Монтаж</td><td>группа монтажёров от Никиты и Дарьи</td><td class="num">5</td><td class="num">проект</td><td class="num">проект</td><td class="num">350 000,00 ₽</td><td class="num">350 000,00 ₽</td></tr><tr class="subtotal"><td colspan="7" class="total-label">ПРОМЕЖУТОЧНЫЙ ИТОГ:</td><td class="num">4 370 000,00 ₽</td></tr><tr class=""><td>2</td><td>Оборудование</td><td>&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td></tr><tr class=""><td>&nbsp;</td><td>Оборудование</td><td>&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">100 000,00 ₽</td><td class="num">100 000,00 ₽</td></tr><tr class=""><td>&nbsp;</td><td>Роутер и есимки команде</td><td>&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">30 000,00 ₽</td><td class="num">30 000,00 ₽</td></tr><tr class=""><td>&nbsp;</td><td>Хард диски по 2-4 ТБ</td><td>&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">70 000,00 ₽</td><td class="num">70 000,00 ₽</td></tr><tr class=""><td>&nbsp;</td><td>Права на музыку</td><td>&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">20 000,00 ₽</td><td class="num">20 000,00 ₽</td></tr><tr class="subtotal"><td colspan="7" class="total-label">ПРОМЕЖУТОЧНЫЙ ИТОГ:</td><td class="num">220 000,00 ₽</td></tr><tr class=""><td>3</td><td>Операционные<br>логистические расходы</td><td>&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td></tr><tr class=""><td>&nbsp;</td><td>Визы команде</td><td>&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">4</td><td class="num">50 000,00 ₽</td><td class="num">200 000,00 ₽</td></tr><tr class=""><td>&nbsp;</td><td>Страховки команде</td><td>&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">4</td><td class="num">10 000,00 ₽</td><td class="num">40 000,00 ₽</td></tr><tr class=""><td>&nbsp;</td><td>Разрешения на съёмку (дрон + разрешения в историческом центре)</td><td>&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">150 000,00 ₽</td><td class="num">150 000,00 ₽</td></tr><tr class=""><td>&nbsp;</td><td>Логистика</td><td>&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">150 000,00 ₽</td><td class="num">150 000,00 ₽</td></tr><tr class=""><td>&nbsp;</td><td>Медикаменты (таблетки от морской болезни)</td><td>&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">40 000,00 ₽</td><td class="num">40 000,00 ₽</td></tr><tr class=""><td>&nbsp;</td><td>Комиссия тендерной площадки</td><td>&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">24 000,00 ₽</td><td class="num">24 000,00 ₽</td></tr><tr class=""><td>&nbsp;</td><td>Непредвиденные расходы 10% от сметы</td><td>&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">519 400,00 ₽</td><td class="num">519 400,00 ₽</td></tr><tr class="subtotal"><td colspan="7" class="total-label">ПРОМЕЖУТОЧНЫЙ ИТОГ:</td><td class="num">1 123 400,00 ₽</td></tr><tr class=""><td>&nbsp;</td><td>Маркап 15%</td><td>&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">857 010,00 ₽</td><td class="num">857 010,00 ₽</td></tr><tr class="grand-total"><td colspan="7" class="total-label">Итого без налога, РУБ:</td><td class="num">6 570 410,00 ₽</td></tr><tr class=""><td>&nbsp;</td><td>Налог, без НДС</td><td>&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">229 561,50 ₽</td><td class="num">229 561,50 ₽</td></tr><tr class="grand-total"><td colspan="7" class="total-label">Итого с налогом 15%, РУБ:</td><td class="num">6 799 971,50 ₽</td></tr></table></div></section><section class="panel" id="p7"><p class="kicker">Пункт 7</p><h2>Стоимость участия команды в одном круизе, включая подготовку, работу на борту, монтаж, постпродакшн, передачу материалов, логистику, оборудование, количество специалистов, потребность в каютах и перечень включённых/не включённых расходов</h2><p>Средняя длительность ~8 ночей. </p><div class="table-wrap"><table class="budget-table"><colgroup>
+  <col class="col-idx">
+  <col class="col-task">
+  <col class="col-name">
+  <col class="col-q1">
+  <col class="col-q2">
+  <col class="col-q3">
+  <col class="col-price">
+  <col class="col-total">
+</colgroup><tr class=""><td>&nbsp;</td><td>Astoria Grande</td><td>1 круиз, 8 дней, до 100 единиц контента</td><td class="num">Astoria Grande</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td></tr><tr><th>№</th><th>Подрядчик<br>задача</th><th>Имя подрядчика<br>рентала</th><th class="num">Кол-во спец-ов</th><th class="num">Кол-во часов</th><th class="num">Количество смен</th><th class="num">Стоимость ед.</th><th class="num">Итого</th></tr><tr class="section-row"><td colspan="8">1.1 · Команда на корабле</td></tr><tr class=""><td>&nbsp;</td><td>Продюсер - координатор</td><td>Бабаева Евгения<br>Федотова Светлана<br>Курандин Павел</td><td class="num">1</td><td class="num">круиз</td><td class="num">8</td><td class="num">120 000,00 ₽</td><td class="num">120 000,00 ₽</td></tr><tr class=""><td>&nbsp;</td><td>Оператор-монтажёр основной с навыком дрона</td><td>Панов Никита<br>Ильясов Фёдор</td><td class="num">1</td><td class="num">круиз</td><td class="num">8</td><td class="num">150 000,00 ₽</td><td class="num">150 000,00 ₽</td></tr><tr class=""><td>&nbsp;</td><td>Оператор-монтажёр - ведущая (+ фото для обложек видео)</td><td>Дарья<br>Диана</td><td class="num">1</td><td class="num">круиз</td><td class="num">8</td><td class="num">150 000,00 ₽</td><td class="num">150 000,00 ₽</td></tr><tr class=""><td>&nbsp;</td><td>Монтажёр</td><td>Ваня<br>Лёша</td><td class="num">1</td><td class="num">круиз</td><td class="num">8</td><td class="num">40 000,00 ₽</td><td class="num">40 000,00 ₽</td></tr><tr class="section-row"><td colspan="8">1.2 · Команда удалённо</td></tr><tr class=""><td>&nbsp;</td><td>Аналитик</td><td>Антон</td><td class="num">1</td><td class="num">круиз</td><td class="num">8</td><td class="num">20 000,00 ₽</td><td class="num">20 000,00 ₽</td></tr><tr class=""><td>&nbsp;</td><td>Юрист</td><td>&nbsp;</td><td class="num">1</td><td class="num">круиз</td><td class="num">8</td><td class="num">10 000,00 ₽</td><td class="num">10 000,00 ₽</td></tr><tr class=""><td>&nbsp;</td><td>Аккаунт<br>логер</td><td>Усков Евгений</td><td class="num">1</td><td class="num">круиз</td><td class="num">8</td><td class="num">25 000,00 ₽</td><td class="num">25 000,00 ₽</td></tr><tr class=""><td>&nbsp;</td><td>Сценарист</td><td>Семён<br>Динар</td><td class="num">1</td><td class="num">круиз</td><td class="num">8</td><td class="num">50 000,00 ₽</td><td class="num">50 000,00 ₽</td></tr><tr class=""><td>&nbsp;</td><td>Монтаж</td><td>группа монтажёров от Никиты и Дарьи</td><td class="num">5</td><td class="num">проект</td><td class="num">проект</td><td class="num">30 000,00 ₽</td><td class="num">30 000,00 ₽</td></tr><tr class="subtotal"><td colspan="7" class="total-label">ПРОМЕЖУТОЧНЫЙ ИТОГ:</td><td class="num">595 000,00 ₽</td></tr><tr class=""><td>2</td><td>Оборудование</td><td>&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td></tr><tr class=""><td>&nbsp;</td><td>Оборудование</td><td>&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">60 000,00 ₽</td><td class="num">60 000,00 ₽</td></tr><tr class=""><td>&nbsp;</td><td>Роутер и есимки команде</td><td>&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">10 000,00 ₽</td><td class="num">10 000,00 ₽</td></tr><tr class=""><td>&nbsp;</td><td>Хард диски по 2-4 ТБ</td><td>&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">22 000,00 ₽</td><td class="num">22 000,00 ₽</td></tr><tr class=""><td>&nbsp;</td><td>Права на музыку</td><td>&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">20 000,00 ₽</td><td class="num">20 000,00 ₽</td></tr><tr class="subtotal"><td colspan="7" class="total-label">ПРОМЕЖУТОЧНЫЙ ИТОГ:</td><td class="num">112 000,00 ₽</td></tr><tr class=""><td>3</td><td>Операционные<br>логистические расходы</td><td>&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td></tr><tr class=""><td>&nbsp;</td><td>Визы команде</td><td>&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">4</td><td class="num">50 000,00 ₽</td><td class="num">200 000,00 ₽</td></tr><tr class=""><td>&nbsp;</td><td>Страховки команде</td><td>&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">4</td><td class="num">10 000,00 ₽</td><td class="num">40 000,00 ₽</td></tr><tr class=""><td>&nbsp;</td><td>Разрешения на съёмку (дрон + разрешения в историческом центре)</td><td>&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">100 000,00 ₽</td><td class="num">100 000,00 ₽</td></tr><tr class=""><td>&nbsp;</td><td>Логистика</td><td>&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">30 000,00 ₽</td><td class="num">30 000,00 ₽</td></tr><tr class=""><td>&nbsp;</td><td>Медикаменты (таблетки от морской болезни)</td><td>&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">10 000,00 ₽</td><td class="num">10 000,00 ₽</td></tr><tr class=""><td>&nbsp;</td><td>Комиссия тендерной площадки</td><td>&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">24 000,00 ₽</td><td class="num">24 000,00 ₽</td></tr><tr class=""><td>&nbsp;</td><td>Непредвиденные расходы 10% от сметы</td><td>&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">111 100,00 ₽</td><td class="num">111 100,00 ₽</td></tr><tr class="subtotal"><td colspan="7" class="total-label">ПРОМЕЖУТОЧНЫЙ ИТОГ:</td><td class="num">515 100,00 ₽</td></tr><tr class=""><td>&nbsp;</td><td>Маркап 15%</td><td>&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">122 210,00 ₽</td><td class="num">122 210,00 ₽</td></tr><tr class="grand-total"><td colspan="7" class="total-label">Итого без налога, РУБ:</td><td class="num">1 344 310,00 ₽</td></tr><tr class=""><td>&nbsp;</td><td>Налог, без НДС</td><td>&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">77 596,50 ₽</td><td class="num">77 596,50 ₽</td></tr><tr class="grand-total"><td colspan="7" class="total-label">Итого с налогом 15%, РУБ:</td><td class="num">1 421 906,50 ₽</td></tr></table></div></section><section class="panel" id="p8"><p class="kicker">Пункт 8</p><h2>Ориентировочный годовой расчёт при участии команды до 18 круизов в год, со средней продолжительностью рейса около 8 ночей</h2><div class="table-wrap"><table class="budget-table"><colgroup>
+  <col class="col-idx">
+  <col class="col-task">
+  <col class="col-name">
+  <col class="col-q1">
+  <col class="col-q2">
+  <col class="col-q3">
+  <col class="col-price">
+  <col class="col-total">
+</colgroup><tr class=""><td>&nbsp;</td><td>Astoria Grande</td><td>18 круизов в год до 8 дней</td><td class="num">Astoria Grande</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td></tr><tr><th>№</th><th>Подрядчик<br>задача</th><th>Имя подрядчика<br>рентала</th><th class="num">Кол-во спец-ов</th><th class="num">Кол-во часов</th><th class="num">Количество смен</th><th class="num">Стоимость ед.</th><th class="num">Итого</th></tr><tr class="section-row"><td colspan="8">1.1 · Команда на корабле</td></tr><tr class=""><td>&nbsp;</td><td>Продюсер - координатор</td><td>Бабаева Евгения<br>Федотова Светлана<br>Курандин Павел</td><td class="num">1</td><td class="num">круиз</td><td class="num">3</td><td class="num">120 000,00 ₽</td><td class="num">360 000,00 ₽</td></tr><tr class=""><td>&nbsp;</td><td>Оператор-монтажёр основной с навыком дрона</td><td>Панов Никита<br>Ильясов Фёдор</td><td class="num">1</td><td class="num">круиз</td><td class="num">18</td><td class="num">150 000,00 ₽</td><td class="num">2 700 000,00 ₽</td></tr><tr class=""><td>&nbsp;</td><td>Оператор-монтажёр - ведущая (+ фото для обложек видео)</td><td>Дарья<br>Диана</td><td class="num">1</td><td class="num">круиз</td><td class="num">18</td><td class="num">150 000,00 ₽</td><td class="num">2 700 000,00 ₽</td></tr><tr class=""><td>&nbsp;</td><td>Монтажёр</td><td>Ваня<br>Лёша</td><td class="num">1</td><td class="num">круиз</td><td class="num">18</td><td class="num">40 000,00 ₽</td><td class="num">720 000,00 ₽</td></tr><tr class="section-row"><td colspan="8">1.2 · Команда удалённо</td></tr><tr class=""><td>&nbsp;</td><td>Аналитик</td><td>Антон</td><td class="num">1</td><td class="num">круиз</td><td class="num">18</td><td class="num">20 000,00 ₽</td><td class="num">360 000,00 ₽</td></tr><tr class=""><td>&nbsp;</td><td>Юрист</td><td>&nbsp;</td><td class="num">1</td><td class="num">круиз</td><td class="num">18</td><td class="num">10 000,00 ₽</td><td class="num">180 000,00 ₽</td></tr><tr class=""><td>&nbsp;</td><td>Аккаунт<br>логер</td><td>Усков Евгений</td><td class="num">1</td><td class="num">круиз</td><td class="num">18</td><td class="num">25 000,00 ₽</td><td class="num">450 000,00 ₽</td></tr><tr class=""><td>&nbsp;</td><td>Сценарист</td><td>Семён<br>Динар</td><td class="num">1</td><td class="num">круиз</td><td class="num">18</td><td class="num">50 000,00 ₽</td><td class="num">900 000,00 ₽</td></tr><tr class=""><td>&nbsp;</td><td>Монтаж</td><td>группа монтажёров от Никиты и Дарьи</td><td class="num">5</td><td class="num">проект</td><td class="num">проект</td><td class="num">30 000,00 ₽</td><td class="num">30 000,00 ₽</td></tr><tr class="subtotal"><td colspan="7" class="total-label">ПРОМЕЖУТОЧНЫЙ ИТОГ:</td><td class="num">8 400 000,00 ₽</td></tr><tr class=""><td>2</td><td>Оборудование</td><td>&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td></tr><tr class=""><td>&nbsp;</td><td>Оборудование</td><td>&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">100 000,00 ₽</td><td class="num">100 000,00 ₽</td></tr><tr class=""><td>&nbsp;</td><td>Роутер и есимки команде</td><td>&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">30 000,00 ₽</td><td class="num">30 000,00 ₽</td></tr><tr class=""><td>&nbsp;</td><td>Хард диски по 2-4 ТБ</td><td>&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">100 000,00 ₽</td><td class="num">100 000,00 ₽</td></tr><tr class=""><td>&nbsp;</td><td>Права на музыку</td><td>&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">20 000,00 ₽</td><td class="num">20 000,00 ₽</td></tr><tr class="subtotal"><td colspan="7" class="total-label">ПРОМЕЖУТОЧНЫЙ ИТОГ:</td><td class="num">250 000,00 ₽</td></tr><tr class=""><td>3</td><td>Операционные<br>логистические расходы</td><td>&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td></tr><tr class=""><td>&nbsp;</td><td>Визы команде</td><td>&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">4</td><td class="num">200 000,00 ₽</td><td class="num">800 000,00 ₽</td></tr><tr class=""><td>&nbsp;</td><td>Страховки команде</td><td>&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">4</td><td class="num">40 000,00 ₽</td><td class="num">160 000,00 ₽</td></tr><tr class=""><td>&nbsp;</td><td>Разрешения на съёмку (дрон + разрешения в историческом центре)</td><td>&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">300 000,00 ₽</td><td class="num">300 000,00 ₽</td></tr><tr class=""><td>&nbsp;</td><td>Логистика</td><td>&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">500 000,00 ₽</td><td class="num">500 000,00 ₽</td></tr><tr class=""><td>&nbsp;</td><td>Медикаменты (таблетки от морской болезни)</td><td>&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">100 000,00 ₽</td><td class="num">100 000,00 ₽</td></tr><tr class=""><td>&nbsp;</td><td>Комиссия тендерной площадки</td><td>&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">24 000,00 ₽</td><td class="num">24 000,00 ₽</td></tr><tr class=""><td>&nbsp;</td><td>Непредвиденные расходы 10% от сметы</td><td>&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">1 053 400,00 ₽</td><td class="num">1 053 400,00 ₽</td></tr><tr class="subtotal"><td colspan="7" class="total-label">ПРОМЕЖУТОЧНЫЙ ИТОГ:</td><td class="num">2 937 400,00 ₽</td></tr><tr class=""><td>&nbsp;</td><td>Маркап 15%</td><td>&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">1 738 110,00 ₽</td><td class="num">1 738 110,00 ₽</td></tr><tr class="grand-total"><td colspan="7" class="total-label">Итого без налога, РУБ:</td><td class="num">13 325 510,00 ₽</td></tr><tr class=""><td>&nbsp;</td><td>Налог, без НДС</td><td>&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">633 826,50 ₽</td><td class="num">633 826,50 ₽</td></tr><tr class="grand-total"><td colspan="7" class="total-label">Итого с налогом 15%, РУБ:</td><td class="num">13 959 336,50 ₽</td></tr></table></div></section><section class="panel" id="p9"><p class="kicker">Пункт 9</p><h2>Отдельная стоимость дополнительных работ: дополнительный съёмочный день, оператор, монтажёр, срочная съёмка, рекламная адаптация, горизонтальное видео, съёмка в порту, запуск и ведение отдельного аккаунта</h2><div class="table-wrap"><table class="budget-table budget-table-6"><colgroup>
+  <col class="col-task">
+  <col class="col-q1">
+  <col class="col-q2">
+  <col class="col-q3">
+  <col class="col-price">
+  <col class="col-total">
+</colgroup><tr><th>Подрядчик<br>задача</th><th class="num">Кол-во спец-ов</th><th class="num">Кол-во часов</th><th class="num">Количество смен</th><th class="num">Стоимость ед.</th><th class="num">Итого</th></tr><tr class=""><td>Дополнительный съёмочный день (2 оператора-монтажёра + продюсер)</td><td class="num">3</td><td class="num">12</td><td class="num">день</td><td class="num">172 500,00 ₽</td><td class="num">172 500,00 ₽</td></tr><tr class=""><td>Дополнительный оператор на день</td><td class="num">1</td><td class="num">12</td><td class="num">день</td><td class="num">57 500,00 ₽</td><td class="num">57 500,00 ₽</td></tr><tr class=""><td>Дополнительный срочный сценарий</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">7 500,00 ₽</td><td class="num">7 500,00 ₽</td></tr><tr class=""><td>Монтажёр</td><td class="num">1</td><td class="num">12</td><td class="num">день</td><td class="num">69 000,00 ₽</td><td class="num">69 000,00 ₽</td></tr><tr class=""><td>Срочная съёмка вне плана</td><td class="num">1</td><td class="num">12</td><td class="num">день</td><td class="num">85 000,00 ₽</td><td class="num">85 000,00 ₽</td></tr><tr class=""><td>Рекламная адаптация готового ролика</td><td class="num">1</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">23 000,00 ₽</td><td class="num">23 000,00 ₽</td></tr><tr class=""><td>Горизонтальное видео до 60 сек</td><td class="num">1</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">46 000,00 ₽</td><td class="num">46 000,00 ₽</td></tr><tr class=""><td>Горизонтальное видео 90–150 сек, новая съёмка</td><td class="num">1</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">150 000,00 ₽</td><td class="num">150 000,00 ₽</td></tr><tr class=""><td>Съёмка в порту весь день</td><td class="num">3</td><td class="num">12</td><td class="num">&nbsp;</td><td class="num">150 000,00 ₽</td><td class="num">150 000,00 ₽</td></tr><tr class=""><td>Запуск отдельного аккаунта</td><td class="num">3</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">200 000,00 ₽</td><td class="num">200 000,00 ₽</td></tr><tr class=""><td>Ведение аккаунта</td><td class="num">1</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">150 000,00 ₽</td><td class="num">150 000,00 ₽</td></tr><tr class=""><td>Публикация офиц. каналов</td><td class="num">1</td><td class="num">&nbsp;</td><td class="num">&nbsp;</td><td class="num">130 000,00 ₽</td><td class="num">130 000,00 ₽</td></tr></table></div><p>Цены  без учёта налогов, логистики, перелётов и виз</p></section><section class="panel" id="p10"><p class="kicker">Пункт 10</p><h2>Подход к работе со стартовыми героями и предложения по дополнительным или альтернативным героям на борту</h2><p>Стартовые герои ТЗ — это хороший базовый набор, мы видим их в контент плане, но на корабле есть ещё много чего, чего люди ожидают, а есть то, о чем не догадываются. Наше предложение расширить информационную воронку, предупредить возражения и показать, что за 7-8 дней вам не дадут скучать. (А если хотите скучать - дадим поскучать)</p><div class="table-wrap"><table class="heroes-table"><colgroup>
+  <col class="col-hero">
+  <col class="col-role">
+  <col class="col-brand">
+  <col class="col-ideas">
+</colgroup><tr><th>Герой</th><th>Роль</th><th>Зачем бренду<br>что продаём через него</th><th>3 стартовые идеи</th></tr><tr class=""><td>Капитан</td><td>Главный человек на борту, отвечает за безопасность, навигацию и управление судном.</td><td>Снимает страхи: «это безопасно?», «кто управляет кораблём?», «что будет в экстренной ситуации?». Одновременно создаёт статус и ощущение большого путешествия.</td><td>1. «Что капитан делает, пока мы лежим у бассейна?»<br>2. «5 вещей на корабле, которые пассажир никогда не замечает»<br>3. «Капитан отвечает на самые неудобные вопросы пассажиров»</td></tr><tr class=""><td>Шеф-повар</td><td>Руководит кухней и всей гастрономической частью: меню, производство еды, команда, качество.</td><td>Отрабатывает возражение «на круизе кормят массово и невкусно». Показывает масштаб, качество и разнообразие питания.</td><td>1. «Сколько еды нужно приготовить для одного дня на лайнере?»<br>2. «Что шеф никогда не позволит подать гостю?»<br>3. «Сколько еды везем с собой?»</td></tr><tr class=""><td>Ведущий</td><td>Лицо развлечений: мероприятия, шоу, интерактив, коммуникация с гостями.</td><td>Главный герой против возражения «на лайнере будет скучно». Показывает энергию, развлечения и социальную жизнь.</td><td>1. «Что делать на лайнере, если у тебя есть только 3 часа?»<br>2. «Проверяем: реально ли на лайнере ни разу не заскучать?»<br>3. «24 часа развлечений — успеешь всё?»</td></tr><tr class=""><td>Хаускипинг</td><td>Отвечает за каюты, уборку, порядок, подготовку номеров и комфорт пассажиров.</td><td>Очень сильный герой для снятия возражений на счет удобств и обслуживания кают.</td><td>1. «Что происходит с вашей каютой, пока вы ушли на завтрак?»<br>2. «5 вещей, которые пассажиры делают неправильно в каюте»<br>3. «Сходства отличия каюты от номера отеля?»</td></tr><tr class=""><td>Тренер<br>спорт</td><td>Отвечает за фитнес, тренировки, спортивные активности и физическую активность гостей.</td><td>Закрывает страх «на круизе только еда, алкоголь и лежать». Показывает активный отдых и возможность сохранить привычный режим.</td><td>1. «Можно ли похудеть в круизе, если здесь столько еды?»<br>2. «Тренер показывает идеальную тренировку на лайнере за 15 минут»<br>3. «Проверяем физическую форму пассажиров: круизный челлендж»</td></tr><tr class=""><td>Детская анимация</td><td>Организует игры, активности, развлечения и присмотр/занятия для детей в рамках предусмотренной программы.</td><td>Один из самых сильных героев для семейной аудитории. Отрабатывает главный страх родителей: «детям будет скучно, а я не отдохну».</td><td>1. «Чем занимаются дети на круизе, пока родители отдыхают?»<br>2. «Ребёнок выбирает программу на день — родители не вмешиваются»<br>3. «10 развлечений для детей за один день на лайнере»</td></tr><tr class=""><td>Врач</td><td>Медицинский специалист на борту, отвечает за первичную медицинскую помощь пассажирам и экипажу.</td><td>Снимает страх «а если я заболею посреди моря?», «что делать, если ребёнку плохо?». Повышает ощущение защищённости.</td><td>1. «Что делать, если вам стало плохо посреди круиза?»<br>2. «Какие проблемы со здоровьем чаще всего возникают у пассажиров?»<br>3. «Правда или миф: что нельзя делать на корабле, чтобы не заболеть?»</td></tr><tr class=""><td>Спа</td><td>Отвечает за процедуры красоты, релакс и wellness.</td><td>Продаёт не транспорт, а состояние и образ жизни. Закрывает возражение «круиз — это беготня по экскурсиям».</td><td>1. «Как выглядит идеальный день восстановления на лайнере?»<br>2. «3 процедуры, которые стоит попробовать во время круиза»<br>3. «Что происходит с организмом после 7 дней отдыха?»</td></tr><tr class=""><td>Контент-<br>команда</td><td>Показывает сам процесс создания контента, жизнь команды и то, что остаётся за кадром.</td><td>Мета-контент. Показывает реальный лайнер глазами людей, которые приехали его исследовать. Создаёт доверие и ощущение присутствия: «я сам там побывал».</td><td>1. Не тревожьте вашего мужа, мы сделаем вам фоточки.<br>2.  «Сколько контента можно снять на круизном лайнере за один день?»<br>3. «Мы пытаемся показать весь лайнер за 60 секунд»</td></tr></table></div><p>В конце месяца, делаем срез по аналитике популярности героев и вопросов. Если темы были не очень популярны, мы закроем цикл темы ответив на все популярные вопросы, закрепим в хайлайты и закончим съемку героя. </p></section><section class="panel" id="p11"><p class="kicker">Пункт 11</p><h2>При наличии предложения по отдельным аккаунтам — их цели, позиционирование, платформы, ресурсы, модель модерации, KPI, порядок владения аккаунтами и интеграцию с официальными каналами бренда</h2><p>Есть предложение создать 3 аккаунта сателлита, которые будут в меньшей степени показывать бренд Лайнера, а ориентированы на массовую аудиторию разных сегментов.  Задача: заходить к людям, которые не интересовались круизами, но у них есть свои увлечения. И через данные аккаунты, привести к тому, что их увлечение есть и на круизном лайнере, но под другим углом, с другим видом или другим соусом. В пилоте не обязательно поднимать все сразу. Можно плавно вводить 1 в месяц.</p><div class="table-wrap"><table class="formats-table"><colgroup>
+  <col class="col-format">
+  <col class="col-idea">
+  <col class="col-hook">
+</colgroup><tr><th>Формат<br>механика</th><th>Идея</th><th>Что цепляет</th></tr><tr class="subheading-row"><td colspan="3"><strong>Кухня</strong></td></tr><tr class=""><td>Масштаб</td><td>Сколько еды нужно, чтобы накормить весь лайнер за один день?</td><td>Огромное число + масштаб производства</td></tr><tr class=""><td>Одна цифра</td><td>Сколько хлеба/яиц выпекается за день?</td><td>Конкретная цифра масштабом</td></tr><tr class=""><td>ASMR</td><td>60 секунд звуков профессиональной кухни</td><td>Звук + визуальный ритм</td></tr><tr class=""><td>ASMR</td><td>Нарезка 10 продуктов крупным планом</td><td>Макро + звук</td></tr><tr class=""><td>High-end</td><td>Шеф превращает самый простой продукт в ресторанное блюдо</td><td>Трансформация</td></tr><tr class=""><td>Transformation</td><td>Яйцо → блюдо уровня fine dining</td><td>До/после</td></tr><tr class=""><td>Простая еда</td><td>Как красиво подать обычную пасту</td><td>Полезность + эстетика</td></tr><tr class=""><td>Кухни мира по туру</td><td>Одна страна — одно блюдо</td><td>Новое</td></tr><tr class=""><td>Blind test</td><td>Шеф отличит дорогой продукт от дешёвого?</td><td>Интрига</td></tr><tr class=""><td>Challenge</td><td>Пассажир выбирает 3 ингредиента — шеф готовит блюдо</td><td>Непредсказуемость</td></tr><tr class=""><td>Challenge</td><td>Шеф готовит блюдо за 10 минут</td><td>Ограничение времени</td></tr><tr class=""><td>Профессия</td><td>Что происходит на кухне за 30 минут до открытия ресторана?</td><td>Закулисье</td></tr><tr class=""><td>Behind the scenes</td><td>Что пассажир никогда не видит на кухне лайнера</td><td>Любопытство</td></tr><tr class=""><td>Сравнение</td><td>Домашняя кухня vs профессиональная кухня</td><td>Контраст</td></tr><tr class=""><td>Speed</td><td>Сколько блюд можно собрать за одну минуту?</td><td>Скорость + масштаб</td></tr><tr class=""><td>Human skill</td><td>Сколько тарелок официант может вынести за один раз?</td><td>Физический навык</td></tr><tr class=""><td>Food porn</td><td>Идеальное блюдо за 30 секунд: от ингредиентов до подачи</td><td>Быстрый монтаж</td></tr><tr class=""><td>Эксперимент</td><td>Что произойдёт, если приготовить одно блюдо 3 способами?</td><td>Сравнение</td></tr><tr class=""><td>Серия</td><td>«Что сегодня едят на лайнере?»</td><td>FOMO</td></tr></table></div><div class="table-wrap"><table class="formats-table"><colgroup>
+  <col class="col-format">
+  <col class="col-idea">
+  <col class="col-hook">
+</colgroup><tr><th>Формат<br>механика</th><th>Виральная идея</th><th>Что цепляет</th></tr><tr class="subheading-row"><td colspan="3"><strong>Спорт</strong></td></tr><tr class=""><td>Ограничение</td><td>Тренировка на 4 м²</td><td>Узкое пространство</td></tr><tr class=""><td>Один предмет</td><td>Вся тренировка с одним стулом/гирей/полотенцем</td><td>Простота</td></tr><tr class=""><td>Локация</td><td>Тренировка с видом на океан</td><td>Визуальный hook</td></tr><tr class=""><td>Before/after</td><td>Что произойдёт, если тренироваться каждый день круиза?</td><td>Эксперимент</td></tr><tr class=""><td>Ограничение</td><td>Тренировка без пола</td><td>Необычное условие</td></tr><tr class=""><td>Challenge</td><td>Пассажир против тренера</td><td>Человек против профессионала</td></tr><tr class=""><td>Test</td><td>Тренер проверяет физическую форму за 30 секунд</td><td>Интерактив</td></tr><tr class=""><td>Location</td><td>10 упражнений, которые можно делать прямо на палубе</td><td>Полезность</td></tr><tr class=""><td>POV</td><td>Тренировка во время шторма</td><td>Нестандартная среда</td></tr><tr class=""><td>Speed</td><td>Сколько калорий можно потратить за 10 минут?</td><td>Конкретный результат</td></tr><tr class=""><td>Myth busting</td><td>Правда ли, что на круизе невозможно держать форму?</td><td>Возражение</td></tr><tr class=""><td>Social</td><td>Тренер просит случайных пассажиров повторить упражнение</td><td>Реакции людей</td></tr></table></div><div class="table-wrap"><table class="formats-table"><colgroup>
+  <col class="col-format">
+  <col class="col-idea">
+  <col class="col-hook">
+</colgroup><tr><th>Формат<br>механика</th><th>Виральная идея</th><th>Что цепляет</th></tr><tr class="subheading-row"><td colspan="3"><strong>Творчество</strong></td></tr><tr class=""><td>Cover</td><td>Хит в неожиданной музыкальной стилистике</td><td>Узнаваемая песня + неожиданное исполнение</td></tr><tr class=""><td>Cover</td><td>Современный хит на старом инструменте</td><td>Неожиданность</td></tr><tr class=""><td>Collaboration</td><td>Музыкант + случайный пассажир</td><td>Непредсказуемость</td></tr><tr class=""><td>Challenge</td><td>Пассажир называет песню — музыкант должен сыграть её</td><td>Импровизация</td></tr><tr class=""><td>Street performance</td><td>Начинаем играть в неожиданном месте корабля</td><td>Реакции окружающих</td></tr><tr class=""><td>Transition</td><td>Музыка начинается в одном месте и продолжается в другом</td><td>Монтажный эффект</td></tr><tr class=""><td>Audience</td><td>100 пассажиров поют одну песню</td><td>Массовость</td></tr><tr class=""><td>Genre swap</td><td>Одна песня — 5 жанров</td><td>Сравнение</td></tr><tr class=""><td>Speed</td><td>Музыкант учит пассажира играть мелодию за 5 минут</td><td>Трансформация</td></tr><tr class=""><td>Visual</td><td>Музыка + закат + открытая палуба</td><td>Эстетика</td></tr></table></div><div class="table-wrap"><table class="formats-table"><colgroup>
+  <col class="col-format">
+  <col class="col-idea">
+  <col class="col-hook">
+</colgroup><tr><th>Формат<br>механика</th><th>Виральная идея</th><th>Что цепляет</th></tr><tr class="section-row"><td colspan="3">Техничка</td></tr><tr class=""><td>Одна цифра</td><td>Сколько весит лайнер?</td><td>Масштаб</td></tr><tr class=""><td>Одна цифра</td><td>Какова длина корабля?</td><td>Простая метрика</td></tr><tr class=""><td>Одна цифра</td><td>Сколько членов экипажа работает на борту?</td><td>Масштаб бизнеса</td></tr><tr class=""><td>Одна цифра</td><td>Сколько кают на лайнере?</td><td>Неожиданное число</td></tr><tr class=""><td>Одна цифра</td><td>Сколько километров корабль проходит за день? Максимум?</td><td>Движение</td></tr><tr class=""><td>Одна цифра</td><td>Сколько воды используется за день?</td><td>Масштаб потребления</td></tr><tr class=""><td>Одна цифра</td><td>Сколько электричества потребляет корабль?</td><td>Энергия</td></tr><tr class=""><td>Сравнение</td><td>Длина лайнера vs известные здания/объекты</td><td>Понятный масштаб</td></tr><tr class=""><td>Сравнение</td><td>Вес лайнера vs N грузовых составов</td><td>Масштаб</td></tr><tr class=""><td>Sound</td><td>Звук двигателя/механизмов vs городская среда</td><td>ASMR + техничка</td></tr><tr class=""><td>Sound</td><td>Как звучит палуба на разных скоростях</td><td>Эксперимент</td></tr><tr class=""><td>POV</td><td>Что видит инженер во время обычного дня?</td><td>Закулисье</td></tr><tr class=""><td>Behind the scenes</td><td>Что находится под пассажирской частью корабля?</td><td>Любопытство</td></tr><tr class=""><td>System</td><td>Как вода попадает в вашу каюту?</td><td>Повседневная вещь → сложная система</td></tr><tr class=""><td>System</td><td>Как на лайнере появляется электричество?</td><td>Базовая технология</td></tr><tr class=""><td>System</td><td>Как корабль знает, где он находится?</td><td>Технология</td></tr><tr class=""><td>System</td><td>Как корабль поворачивает такую массу?</td><td>Контринтуитивность</td></tr><tr class=""><td>Series</td><td>«Одна цифра про лайнер в день»</td><td>Очень простой серийный формат</td></tr></table></div><p>Запуск — после согласования. Платформы - все текущие платформы с фокусом на вертикальный контент. Ресурсы - дополнительных ресурсов не потребуется, используем основную команду. Модерация - по принципу аналитики по результатам тестового месяца. Владение аккаунтами - аккаунты в полном владении команды клиента. Интеграция - плавная и нативная. Где есть функции кросс-публикации, используем её. Где нет, даем упоминания используемых локаций и должностей. <em>Прим </em>Главный тренер лайнера Astoria, Главный инженер лайнера Astoria</p></section><section class="panel" id="p12"><p class="kicker">Пункт 12</p><h2>15–20 стартовых идей и не менее 5 подробно разработанных тем для первого рейса</h2><div class="table-wrap"><table class="index-table"><tr><th>№</th><th>Тип</th><th>Тема</th><th>Что происходит</th></tr><tr class=""><td>1</td><td>Старт<br>cinematic</td><td>Мы выходим в круиз</td><td>Большой запуск проекта. Началокуриза: команда, камеры, посадка, первые кадры лайнера, море, маршрут. Фраза-завязка: «Следующие N дней наша студия будет работать прямо с борта этого лайнера».</td></tr><tr class=""><td>2</td><td>Репортаж</td><td>Первое утро на лайнере</td><td>Как просыпается корабль, все службы начинают работу, появляются гости, открываются пространства. Зритель проживает первое утро вместе с командой.</td></tr><tr class=""><td>3</td><td>Персонаж</td><td>Капитан: человек, который управляет всем этим</td><td>Капитан не даёт стандартное интервью. Он проводит репортёров туда, где обычно не бывает пассажир, и рассказывает о корабле факты..</td></tr><tr class=""><td>4</td><td>НОВОСТИ №1</td><td>Срочный выпуск: наша студия обнаружила, чем на самом деле живёт лайнер в первые часы рейса</td><td>Ведущий в студии/на палубе + быстрые включения: кухня, housekeeping, подготовка ресторанов, экипаж, пассажиры. Подача как первая большая новость с борта.</td></tr><tr class=""><td>5</td><td>Масштаб</td><td>Один день — сколько всего происходит одновременно?</td><td>Ведущий пытается зафиксировать весь объём жизни корабля за один день. Спорт, еда, шоу, дети, бассейн, сервис, техническая работа. Это одновременно показывает продукт и ритм лайнера.</td></tr><tr class=""><td>6</td><td>Техничка</td><td>Корабль в цифрах</td><td>Один мощный визуальный материал про длину, высоту, массу, скорость, количество людей, кают и инфраструктуру. Не перегружать фактами: только цифры, которые помогают почувствовать масштаб.</td></tr><tr class=""><td>7</td><td>Персонажи</td><td>10 людей, благодаря которым ваш день на лайнере вообще работает</td><td>Быстрые портреты: хаускипинг, повар, техник, аниматор, врач, ведущий и другие. Не интервью, а одна фраза + действие человека.</td></tr><tr class=""><td>8</td><td>Ведущий<br>эксперимент</td><td>Ведущий пытается прожить идеальный день на лайнере</td><td>Он сам становится пассажиром и пытается собрать лучший день из всего доступного. Главный вопрос: реально ли за один день всё попробовать?</td></tr><tr class=""><td>9</td><td>НОВОСТИ №2</td><td>Важная новость: мы выяснили, что пассажиры делают первые часы после посадки</td><td>Живой репортаж с борта. Ведущий наблюдает за гостями, разговаривает с ними, собирает микрореакции и показывает первые эмоции.</td></tr><tr class=""><td>10</td><td>Еда</td><td>Что происходит на кухне, пока ресторан ещё пуст</td><td>Закулисье с шефом. От подготовки продуктов до открытия дверей. Финал — резкий переход от пустого ресторана к полному залу.</td></tr><tr class=""><td>11</td><td>Репортаж</td><td>Лайнер после полуночи</td><td>Совершенно другой визуальный образ корабля. Пустые палубы, ночная кухня, уборка, персонал, свет, море. Можно сделать наиболее кинематографичный материал месяца.</td></tr><tr class=""><td>12</td><td>НОВОСТИ №3</td><td>С борта сообщают: мы нашли места на лайнере, которые пассажиры почти никогда не замечают</td><td>Ведущий выпускает «спецрепортаж»: несколько необычных разрешённых зон и деталей, которые обычно проходят мимо гостей.</td></tr><tr class=""><td>13</td><td>Люди<br>social proof</td><td>Почему эти люди выбрали именно этот круиз?</td><td>Никаких постановочных отзывов. 10–15 настоящих пассажиров отвечают на один вопрос: «Зачем вы сюда приехали?» Много лиц, возрастов, мотиваций.</td></tr><tr class=""><td>14</td><td>Ведущий + капитан</td><td>Капитан отвечает на вопросы пассажиров</td><td>Вопросы собираются заранее через соцсети. Капитан отвечает на самые неожиданные, бытовые и волнующие вопросы. Это одновременно персонаж, доверие и интерактив.</td></tr><tr class=""><td>15</td><td>Маршрут</td><td>Первый порт: что реально можно успеть за один день?</td><td>Не туристический каталог. Команда выходит в город и показывает реальный тайминг: что успели, что не успели, куда стоит идти. Начинаем продавать не корабль, а путешествие.</td></tr><tr class=""><td>16</td><td>НОВОСТИ №4</td><td>Экстренный репортаж с берега: наша команда выясняет, стоит ли вообще сходить в этом порту</td><td>Ведущий ведёт «выпуск с места событий»: маршрут, атмосфера, неожиданные места, ошибки туристов, впечатления.</td></tr><tr class=""><td>17</td><td>Возражения</td><td>Мы собрали главные мифы о круизах и проверили их на себе</td><td>Укачивает? Скучно? Мало места? Только пенсионеры? Дети устанут? Еда посредственная? Не рассказываем — проверяем экспериментом.</td></tr><tr class=""><td>18</td><td>Семья<br>lifestyle</td><td>Один день глазами семьи</td><td>Родители хотят отдыхать, дети хотят развлечений. Показываем реальный день и как продукт работает для разных членов семьи. Очень сильный материал с точки зрения будущих продаж.</td></tr><tr class=""><td>19</td><td>НОВОСТИ №5</td><td>Главная новость нашего путешествия: после нескольких дней на борту мы поняли, что нас удивило больше всего</td><td>Сводный «редакционный» выпуск. Несколько включений от команды, гостей и сотрудников. Не рекламный вывод, а собственная журналистская рефлексия.</td></tr><tr class=""><td>20</td><td>Финал<br>продажа через эмоцию</td><td>Если бы нам предложили остаться ещё на неделю</td><td>Команда отвечает: что бы делали ещё раз, что не успели, куда обязательно вернулись бы. Финал должен переводить зрителя из наблюдателя в потенциального пассажира.</td></tr></table></div><h3>Пять выпусков дают полноценную редакционную линию:</h3><div class="idea"><strong>НОВОСТИ №1</strong>мы только пришли и выясняем, как живёт корабль.</div><div class="idea"><strong>НОВОСТИ №2</strong>начинаем наблюдать за пассажирами и самой жизнью круиза.</div><div class="idea"><strong>НОВОСТИ №3</strong>раскрываем внутреннюю сторону лайнера.</div><div class="idea"><strong>НОВОСТИ №4</strong>выходим с борта в маршрут и становимся полноценной выездной студией.</div><div class="idea"><strong>НОВОСТИ №5</strong>подводим промежуточный итог путешествия.</div><p>Общую концепцию идем по линии:  «Что это?»   «Кто здесь?»  «Как это работает?» «Каково здесь жить?»  «Какой маршрут?»  «Хочу туда».</p><p>Капитан и другие люди - важный якорь доверия, а ведущий - друг зрителя, который на их стороне. Ведущий должен не рассказывает зрителю про лайнер, а исследует его вместе со зрителем.</p><div class="idea"><strong>НОВОСТЬ</strong>красная точка, срочность, титр, включение, короткие синхроны.</div><div class="idea"><strong>РЕПОРТАЖ</strong>камера следует за героем, минимум постановки.</div><div class="idea"><strong>РАССЛЕДОВАНИЕ</strong>ведущий ставит вопрос и ищет ответ на борту.</div><div class="idea"><strong>ЛИЧНАЯ ИСТОРИЯ</strong>один человек и его день.</div><div class="idea"><strong>CINEMATIC</strong>атмосфера, море, свет, музыка, минимальный текст.</div><div class="idea"><strong>LIVE / ON BOARD</strong>ощущение, что зритель находится прямо сейчас на лайнере.</div></section><section class="panel" id="p13"><p class="kicker">Пункт 13</p><h2>Пример контент-плана одного круиза, съёмочного дня и сценария вертикального ролика</h2><p>Пример контент-плана выше, с кратко расписанными идеями и разделенными на сегменты. Отдельно герои, отдельно новостные репортажи и дейли бейсик контент. </p></section><section class="panel" id="p14"><p class="kicker">Пункт 14</p><h2>Релевантные кейсы со ссылками на реальные аккаунты и примерами измеримых результатов</h2><h3>Ссылки на аккаунты:</h3><p><a href="https://www.instagram.com/ivlevchef?igsi=MWM1bmx5a3d0aDN0NQ==" target="_blank" rel="noopener">https://www.instagram.com/ivlevchef?igsi=MWM1bmx5a3d0aDN0NQ==</a></p><p><a href="https://www.instagram.com/ivlev_group?igsi=eWdneHRzd3RpYmlk" target="_blank" rel="noopener">https://www.instagram.com/ivlev_group?igsi=eWdneHRzd3RpYmlk</a></p><p><a href="https://www.instagram.com/chef.angels.russia?igsi=YjAxOTc3NW1uemU=" target="_blank" rel="noopener">https://www.instagram.com/chef.angels.russia?igsi=YjAxOTc3NW1uemU=</a></p>
+<div class="case-metrics">
+  <p class="metrics-platform">ВКонтакте</p>
+  <div class="table-wrap"><table class="metrics-table">
+    <tr><th>Квартал</th><th class="num">Охват</th><th class="num">Прирост подписчиков</th><th class="num">ER</th></tr>
+    <tr><td>2 кв</td><td class="num">3 000 000</td><td class="num">800</td><td class="num">1,05%</td></tr>
+    <tr><td>3 кв</td><td class="num">3 200 000</td><td class="num">1 600</td><td class="num">1,08%</td></tr>
+    <tr><td>4 кв</td><td class="num">3 400 000</td><td class="num">1 800</td><td class="num">1,10%</td></tr>
+  </table></div>
+  <p class="metrics-platform">Instagram</p>
+  <div class="table-wrap"><table class="metrics-table">
+    <tr><th>Квартал</th><th class="num">Охват</th><th class="num">Прирост подписчиков</th><th class="num">ER</th></tr>
+    <tr><td>2 кв</td><td class="num">200 000</td><td class="num">1 200</td><td class="num">6%</td></tr>
+    <tr><td>3 кв</td><td class="num">220 000</td><td class="num">1 300</td><td class="num">6,1%</td></tr>
+    <tr><td>4 кв</td><td class="num">240 000</td><td class="num">1 400</td><td class="num">6,12%</td></tr>
+  </table></div>
+</div>
+<p>За три квартала мы провели масштабную работу в соцсетях Ivlev Group. Через контент с амбассадором, коллаборации, мероприятия и бартерные интеграции с инфлюенсерами мы сформировали глубокое знание о бренде, повысили узнаваемость и создали лояльную аудиторию, что напрямую стимулировало покупательский спрос. Мы не просто выполнили KPI – мы заложили прочную основу для дальнейшего роста  </p></section><section class="panel" id="p15"><p class="kicker">Пункт 15</p><h2>При наличии — подход к оценке ROI, релевантные кейсы с бизнес-результатом и сценарная модель потенциальной окупаемости пилота</h2><p>В данном разделе используются усредненные финансовые отраслевые данные и минимальные средние значения конверсий для соц сетей. Так же не учитываются прочие целевые расходы на продвижение такие как ФОТ cvv команды и затраты на рекламу, поскольку мы рассчитываем показатели органического трафика. </p><h3>1. Модель social media-воронки</h3><div class="table-wrap"><table class="kv-table"><colgroup>
+  <col class="col-key">
+  <col class="col-val">
+</colgroup><tr class="section-row"><td colspan="2">Исходные показатели</td></tr><tr><th>Показатель</th><th>Значение</th></tr><tr class=""><td>Срок пилота</td><td>3 месяца</td></tr><tr class=""><td>Стоимость пилота</td><td>6 000 000 ₽</td></tr><tr class=""><td>Средний чек круиза</td><td>250 000 ₽</td></tr><tr class=""><td>Расчётная маржинальность</td><td>20%</td></tr><tr class=""><td>Маржинальный вклад с одной брони</td><td>50 000 ₽</td></tr><tr class="section-row"><td colspan="2">Показатели конверсии</td></tr><tr><th>Этап</th><th>Конверсия</th></tr><tr class=""><td>Просмотр → переход в профиль</td><td>2%</td></tr><tr class=""><td>Профиль → клик по ссылке</td><td>5%</td></tr><tr class=""><td>Клик → заявка</td><td>5%</td></tr><tr class=""><td>Заявка → бронирование</td><td>4%</td></tr></table></div><p>Таким образом: 2% × 5% × 5% × 4% = 0,0002% или ≈ 1 бронирование на 500 000 просмотров</p><h3>2. Точка безубыточности</h3><p>Стоимость пилота: 6 000 000 ₽Маржинальный вклад с одной брони: 50 000 ₽Следовательно: 6 000 000 / 50 000 = 120 бронированийЧтобы полностью покрыть стоимость пилота, необходимо получить: 120 доп бронирований.При нашей модели конверсии это соответствует: ≈ 60 млн просмотров.</p><h3>3. Сценарии потенциальной окупаемости</h3><div class="table-wrap"><table class="scenario-table"><colgroup>
+  <col class="col-scenario">
+  <col class="col-views">
+  <col class="col-bookings">
+  <col class="col-margin">
+  <col class="col-roi">
+</colgroup><tr><th>Сценарий</th><th class="num">Просмотры</th><th class="num">Брони</th><th class="num">Маржинальный вклад</th><th class="num">ROI</th></tr><tr class=""><td>Низкий</td><td class="num">20 млн</td><td class="num">40</td><td class="num">2,0 млн ₽</td><td class="num">–67%</td></tr><tr class=""><td>Базовый</td><td class="num">60 млн</td><td class="num">120</td><td class="num">6,0 млн ₽</td><td class="num">0%</td></tr><tr class=""><td>Хороший</td><td class="num">75 млн</td><td class="num">150</td><td class="num">7,5 млн ₽</td><td class="num">0,25</td></tr><tr class=""><td>Очень сильный</td><td class="num">150 млн</td><td class="num">300</td><td class="num">15,0 млн ₽</td><td class="num">1,5</td></tr></table></div><h3>4. Какие показатели будем измерять фактически</h3><div class="table-wrap"><table class="kv-table"><colgroup>
+  <col class="col-key">
+  <col class="col-val">
+</colgroup><tr><th>Блок</th><th>KPI</th></tr><tr class=""><td>Охват</td><td>Просмотры</td></tr><tr class=""><td>Виральность</td><td>Пересылки</td></tr><tr class=""><td>Вовлечение</td><td>Лайки, комментарии</td></tr><tr class=""><td>Интерес к бренду</td><td>Переходы в профиль</td></tr><tr class=""><td>Трафик</td><td>Клики по ссылке</td></tr><tr class=""><td>Сайт</td><td>Переходы на сайт</td></tr><tr class=""><td>Конверсия</td><td>Обращения<br>заявки</td></tr><tr class=""><td>Продажи</td><td>Бронирования</td></tr><tr class=""><td>Экономика</td><td>Маржинальный вклад<br>ROI</td></tr></table></div><p>Поскольку действие контента не заканчивается по истечению 3х месяц, а продолжает приводить трафик, то данные могут быть размыты в сторону большего количества месяц, но остановимся на границе 3х месяцев. </p><h3>Итоговая модель:</h3><p> Инвестиция: 6 млн ₽ Средний чек: 250 тыс. ₽ Маржинальный вклад: 50 тыс. ₽ / бронь Точка безубыточности: 120 бронирований Необходимый охват при baseline-конверсии: ~60 млн просмотров Target: 60–100 млн просмотров Ориентир: 120–200 бронирований Потенциальный ROI: от 0% до +67% Сильный сценарий: 120 млн просмотров / 300 броней / +120% ROI, при среднем кол-во просмотров 500-600к</p></section><section class="panel" id="p16"><p class="kicker">Пункт 16</p><h2>Методика тестирования форматов, достижения органического охвата и оценки влияния на трафик, обращения, заявки и бронирования</h2><p>Модель оценки: от охвата к продажам</p><div class="table-wrap"><table class="content-table"><tr class=""><td>Этап</td><td>Задача</td><td>Основные показатели</td></tr><tr class=""><td>Охват</td><td>Масштабировать аудиторию</td><td>Reach, Views, Impressions</td></tr><tr class=""><td>Интерес</td><td>Определить контент, вызывающий реакцию</td><td>ER, Shares, Saves, Comments</td></tr><tr class=""><td>Трафик</td><td>Перевести интерес в переходы</td><td>Clicks, CTR, Sessions</td></tr><tr class=""><td>Обращения</td><td>Сформировать коммерческий интерес</td><td>Messages, Calls, Leads</td></tr><tr class=""><td>Продажи</td><td>Оценить бизнес-результат</td><td>Leads, Bookings, CR</td></tr></table></div><p>Методика тестирования и оценки эффективности</p><h3>1. Тестируем контент и масштабируем органический охват За 3 месяца выпускаем 900 единиц контента на основных площадках  VK, YouTube, Instagram — и 4 тематических сателлитах: Техника, Искусство, Кухня, Спорт. Тестируем темы, форматы, подачу, первые секунды контента и CTA, чтобы определить механики, способные системно увеличивать органический охват. И комбинации с CTA, влиянием визуала и тем.Поскольку не ориентируемся на исторические данные , первый месяц используем для формирования своих базовых показателей. Оцениваем контент по охвату, просмотрам, вовлечению, репостам, сохранениям и досмотрам, после чего каждый следующий месяц увеличиваем долю наиболее эффективных форматов и тематик.</h3><p>Влияние контента на трафик также оценивается сравнительным анализом категорий контента и видов каакнутов, если говорим про дополнительные аккаунты. Инструменты анализити LiveDune, TGstats, vidIQ. </p><p>Дополнительно для увеличения охватов и целевых действий с контентом потребуется оптимизация площадок, в частности YT канала, тк на данный момент там практически отсутствует необходимые теги, категории и тексты, которые непосредственно влияют на органическое продвижение контента. </p></section><section class="panel" id="p17"><p class="kicker">Пункт 17</p><h2>Формы еженедельного статуса и ежемесячного аналитического отчёта</h2><p>Все формы отчета, статусов, внутренних распорядков, хранение файлов и информация, необходимая для работы кросс-отедлов предлагаем хранить в рабочей среде Yonote, пример пространства по ссылке <a href="https://paramonov-prod.yonote.ru/share/94aa3174-6461-4053-9750-4d7892540d1e" target="_blank" rel="noopener">https://paramonov-prod.yonote.ru/share/94aa3174-6461-4053-9750-4d7892540d1e</a> </p></section><section class="panel" id="p19"><p class="kicker">Пункт 19</p><h2>Полный перечень передаваемых материалов и прав</h2><p>После оплаты этапа - исключительные права без ограничений по территории, сроку и способам на оплаченное. Использование: соцсети, реклама, сайт, рассылки, печать, менеджеры, партнёры, агентская сеть. Закрепленные дополнительным соглашением к договору с копиями договоров подписанные с каждым участником команды. Водяных знаков сторонних приложений не будет. </p></section><section class="panel" id="p20"><p class="kicker">Пункт 20</p><h2>Условия правок, сроки, SLA и порядок согласований</h2><p>Съёмки: график, локации и задачи согласуются заранее. Изменения после утверждения — только при наличии возможности у команды и с учётом расписания лайнера.  </p><p>До начала рейса мы предлагаем, а клиент утверждает съёмочный план: даты, временные окна, локации, приоритетные сцены и состав необходимого контента. </p><p>После утверждения съёмочного плана изменения со стороны клиента, которые требуют повторного выхода команды на локацию, изменения маршрута съёмки или привлечения дополнительных ресурсов, рассматриваются как отдельная производственная задача.</p><p>Если необходимая сцена не может быть снята по причинам, не зависящим от продакшна — погодные условия, закрытие локации, изменение расписания лайнера, ограничения экипажа, безопасность, технические ограничения и т. п. — команда предлагает ближайшее доступное альтернативное окно или альтернативное решение.</p><p>Сдача: сроки устанавливаются отдельно для каждого типа контента. Срок считается с момента получения полного ТЗ и необходимых материалов. Минимальное время производства 2-3 часа от съемки до монтажа. </p><p>Правки: в стоимость входят неограниченное количество правок. Правки вносятся </p><p>SLA клиента: комментарии и согласования предоставляются в течение 24 часов. Задержка клиента автоматически сдвигает сроки продакшна.</p><p>Согласование и правки: со стороны клиента назначается один ответственный, который собирает и передаёт финальные комментарии команде. Мы готовы принимать консолидированные </p><p>Лайнер: погодные условия, расписание, доступ к локациям, безопасность и другие ограничения на борту могут влиять на сроки. В таких случаях команда предлагает ближайшее возможное решение.</p><p>Срочные задачи: выполняются только при наличии ресурсов и возможности встроить их в текущий график. Дополнительные работы согласуются отдельно.</p></section></div>
+
+<script>
+(() => {
+  const nav = document.querySelector('nav.toc');
+  if (!nav) return;
+  const links = [...nav.querySelectorAll('a')];
+  const sections = links.map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+  if (!sections.length) return;
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      links.forEach(a => a.classList.toggle('on', a.getAttribute('href') === '#' + e.target.id));
+    });
+  }, { rootMargin: '-20% 0px -65% 0px', threshold: 0 });
+  sections.forEach(s => obs.observe(s));
+})();
+</script>
+
 </body>
 </html>
-
