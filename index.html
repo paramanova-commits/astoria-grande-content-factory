@@ -276,10 +276,20 @@ td {
 tr:last-child td { border-bottom: 0; }
 tbody tr:nth-child(even) td { background: #fafbfc; }
 tbody tr:hover td { background: var(--blue-soft); }
-td.num, th.num {
+td.num {
   text-align: right;
   white-space: nowrap;
   font-variant-numeric: tabular-nums;
+}
+th.num {
+  text-align: center;
+  white-space: normal;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.25;
+}
+table th {
+  color: #fff;
+  background: var(--blue);
 }
 tr.subtotal td { background: #f3f4f6 !important; font-weight: 700; }
 tr.grand-total td { background: var(--blue-soft) !important; font-weight: 700; color: var(--blue-dark); }
@@ -316,16 +326,19 @@ tr.subheading-row strong { font-weight: 700; }
   min-width: 36px;
   max-width: 40px;
   text-align: center;
-  color: var(--muted);
   padding-left: 8px;
   padding-right: 8px;
 }
+.budget-table td:first-child { color: var(--muted); }
+.budget-table th:first-child { color: #fff; }
 .budget-table td:nth-child(2),
-.budget-table th:nth-child(2) { min-width: 150px; }
+.budget-table th:nth-child(2) { min-width: 150px; text-align: left; }
 .budget-table td:nth-child(3),
-.budget-table th:nth-child(3) { min-width: 160px; }
-.budget-table td.num:not(:nth-last-child(-n+2)),
+.budget-table th:nth-child(3) { min-width: 160px; text-align: left; }
+.budget-table td.num:not(:nth-last-child(-n+2)) { text-align: center; }
 .budget-table th.num:not(:nth-last-child(-n+2)) { text-align: center; }
+.budget-table td.num:nth-last-child(-n+2),
+.budget-table th.num:nth-last-child(-n+2) { text-align: right; }
 .budget-table td.total-label,
 .budget-table th.total-label {
   text-align: right;
@@ -333,38 +346,51 @@ tr.subheading-row strong { font-weight: 700; }
   padding-right: 16px;
 }
 .budget-table-6 {
-  min-width: 880px;
+  table-layout: fixed;
+  min-width: 960px;
 }
-.budget-table-6 .col-task { width: 38%; }
-.budget-table-6 .col-q1 { width: 10%; }
-.budget-table-6 .col-q2 { width: 10%; }
-.budget-table-6 .col-q3 { width: 10%; }
+.budget-table-6 .col-task { width: 32%; }
+.budget-table-6 .col-q1 { width: 11%; }
+.budget-table-6 .col-q2 { width: 11%; }
+.budget-table-6 .col-q3 { width: 14%; }
 .budget-table-6 .col-price { width: 16%; }
 .budget-table-6 .col-total { width: 16%; }
 .budget-table-6 th:first-child,
 .budget-table-6 td:first-child {
-  width: auto;
-  min-width: 240px;
-  max-width: none;
   text-align: left;
-  color: var(--ink);
   padding-left: 14px;
   padding-right: 14px;
+  vertical-align: middle;
 }
-.budget-table-6 td.num:not(:nth-last-child(-n+2)),
+.budget-table-6 td:first-child {
+  min-width: 220px;
+  color: var(--ink);
+  font-weight: 400;
+}
+.budget-table-6 th:first-child {
+  min-width: 220px;
+  color: #fff;
+  font-weight: 600;
+}
+.budget-table-6 td.num:not(:nth-last-child(-n+2)) { text-align: center; }
 .budget-table-6 th.num:not(:nth-last-child(-n+2)) { text-align: center; }
+.budget-table-6 td.num:nth-last-child(-n+2),
+.budget-table-6 th.num:nth-last-child(-n+2) { text-align: right; }
 .index-table td:first-child,
 .index-table th:first-child {
   width: 56px;
   min-width: 56px;
   max-width: 64px;
   text-align: center;
-  white-space: nowrap;
 }
+.index-table td:first-child { white-space: nowrap; }
+.index-table th:first-child { color: #fff; white-space: normal; }
 .index-table td:nth-child(2),
-.index-table th:nth-child(2) { min-width: 180px; }
+.index-table th:nth-child(2) { min-width: 180px; text-align: left; }
 .index-table td:nth-child(3),
-.index-table th:nth-child(3) { min-width: 200px; }
+.index-table th:nth-child(3) { min-width: 200px; text-align: left; }
+.index-table td:nth-child(4),
+.index-table th:nth-child(4) { min-width: 200px; text-align: left; }
 .heroes-table {
   table-layout: fixed;
   min-width: 920px;
@@ -376,22 +402,32 @@ tr.subheading-row strong { font-weight: 700; }
 .heroes-table th:first-child,
 .heroes-table td:first-child {
   text-align: left;
-  white-space: nowrap;
-  font-weight: 600;
-  color: var(--blue-dark);
   vertical-align: top;
   padding-top: 12px;
 }
+.heroes-table td:first-child {
+  white-space: nowrap;
+  font-weight: 600;
+  color: var(--blue-dark);
+}
+.heroes-table th:first-child { color: #fff; font-weight: 600; white-space: normal; }
+.heroes-table th { text-align: left; }
 .content-table {
   table-layout: fixed;
   min-width: 720px;
 }
-.content-table th:first-child,
+.content-table th { text-align: left; }
 .content-table td:first-child {
   min-width: 120px;
   text-align: left;
   white-space: normal;
   vertical-align: top;
+}
+.content-table th:first-child {
+  min-width: 120px;
+  text-align: left;
+  color: #fff;
+  white-space: normal;
 }
 .content-table td:nth-child(2),
 .content-table th:nth-child(2) { min-width: 160px; }
@@ -414,9 +450,10 @@ tr.subheading-row strong { font-weight: 700; }
   min-width: 0;
   text-align: left;
   white-space: normal;
-  font-weight: 600;
-  color: var(--blue-dark);
 }
+.formats-table td:first-child { font-weight: 600; color: var(--blue-dark); }
+.formats-table th:first-child { color: #fff; font-weight: 600; }
+.formats-table th { text-align: left; }
 .formats-table td:nth-child(2),
 .formats-table th:nth-child(2),
 .formats-table td:nth-child(3),
@@ -426,41 +463,6 @@ tr.subheading-row strong { font-weight: 700; }
 }
 .kv-table {
   table-layout: fixed;
-  min-width: 520px;
-}
-.kv-table .col-key { width: 54%; }
-.kv-table .col-val { width: 46%; }
-.kv-table th,
-.kv-table td { vertical-align: middle; }
-.kv-table th:first-child,
-.kv-table td:first-child {
-  min-width: 0;
-  text-align: left;
-  font-weight: 600;
-  color: var(--blue-dark);
-  overflow-wrap: break-word;
-}
-.kv-table th:last-child,
-.kv-table td:last-child {
-  min-width: 0;
-  text-align: right;
-  font-variant-numeric: tabular-nums;
-}
-.scenario-table {
-  table-layout: fixed;
-  min-width: 720px;
-}
-.scenario-table .col-scenario { width: 18%; }
-.scenario-table .col-views { width: 16%; }
-.scenario-table .col-bookings { width: 14%; }
-.scenario-table .col-margin { width: 26%; }
-.scenario-table .col-roi { width: 14%; }
-.scenario-table th,
-.scenario-table td { vertical-align: middle; }
-.scenario-table td.num,
-.scenario-table th.num { text-align: right; }
-.kv-table {
-  table-layout: fixed;
   min-width: 640px;
 }
 .kv-table .col-key { width: 58%; }
@@ -468,19 +470,30 @@ tr.subheading-row strong { font-weight: 700; }
 .kv-table th,
 .kv-table td {
   vertical-align: top;
-  text-align: left;
   overflow-wrap: break-word;
 }
-.kv-table td:first-child,
-.kv-table th:first-child {
+.kv-table td:first-child {
   min-width: 0;
+  text-align: left;
   font-weight: 600;
   color: var(--blue-dark);
 }
-.kv-table td:last-child,
+.kv-table th:first-child {
+  min-width: 0;
+  text-align: left;
+  color: #fff;
+  font-weight: 600;
+}
+.kv-table td:last-child {
+  min-width: 0;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
 .kv-table th:last-child {
   min-width: 0;
-  font-variant-numeric: tabular-nums;
+  text-align: right;
+  color: #fff;
+  font-weight: 600;
 }
 .scenario-table {
   table-layout: fixed;
@@ -495,17 +508,12 @@ tr.subheading-row strong { font-weight: 700; }
 .scenario-table td {
   vertical-align: top;
   overflow-wrap: break-word;
+  text-align: left;
 }
-.scenario-table td:first-child,
-.scenario-table th:first-child {
-  font-weight: 600;
-  color: var(--blue-dark);
-}
-.scenario-table td.num,
-.scenario-table th.num {
-  text-align: right;
-  white-space: nowrap;
-}
+.scenario-table td:first-child { font-weight: 600; color: var(--blue-dark); }
+.scenario-table th:first-child { color: #fff; font-weight: 600; }
+.scenario-table td.num { text-align: right; white-space: nowrap; }
+.scenario-table th.num { text-align: right; white-space: normal; color: #fff; }
 .package-note {
   margin: 0 0 14px;
   padding: 14px 18px;
@@ -537,15 +545,21 @@ tr.subheading-row strong { font-weight: 700; }
 }
 .case-metrics .metrics-platform:first-child { margin-top: 4px; }
 .metrics-table { table-layout: auto; min-width: 0; }
-.metrics-table td:first-child,
-.metrics-table th:first-child {
+.metrics-table td:first-child {
   width: 72px;
   min-width: 72px;
   text-align: center;
   white-space: nowrap;
 }
-.metrics-table td.num,
-.metrics-table th.num { text-align: right; white-space: nowrap; }
+.metrics-table th:first-child {
+  width: 72px;
+  min-width: 72px;
+  text-align: center;
+  color: #fff;
+  white-space: normal;
+}
+.metrics-table td.num { text-align: right; white-space: nowrap; }
+.metrics-table th.num { text-align: right; white-space: normal; color: #fff; }
 figure { margin: 20px 0 8px; }
 .section-img {
   max-width: 100%;
